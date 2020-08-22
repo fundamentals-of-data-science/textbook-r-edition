@@ -1,0 +1,35 @@
+# Probability
+
+In this chapter we will discuss the probability as a framework for working with uncertainty.  We’ll start by definingprobability then move to theaxiomsof probability. We’ll talk about differenttypesof probability that cover scenariosfor complex events when some characteristics of the outcome are known.  We’ll then move on torulesof probabilitythat permit us to manipulate probabilities.
+
+Probability is used to talk about the plausibility of events. Sometimes the co-occurrence of events gives us additionalinformation (if someone one is wealthy, they may also wear designer labels). However, sometimes the co-occurrencegives us no additional information. We will talk aboutindependenceandconditional independence.
+
+Probability is tricky and associated with a number offallacies, which we will discuss. This forms a subset of fallaciesassociated with data analysis in general which we will cover in a later chapter. Finally, we’ll go over some applicationsof probability and the role ofsimulationin solving problems involving probability.
+
+## From Systems Thinking to Probability
+
+## Definition of Probability
+
+## Axioms of Probabilty
+
+### Notation
+
+## Types of Probability
+
+### Joint Probability
+
+### Conditional Probability
+
+### Marginal or Prior Probability
+
+## Rules of Probability
+
+## Independence and Conditional Independence
+
+## Probablistic Fallacies
+
+## Applications
+
+## Probability and Simulation
+
+## Conclusion
