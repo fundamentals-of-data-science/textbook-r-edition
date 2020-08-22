@@ -144,7 +144,7 @@ A Causal Loop Diagram is, at its most basic, a directed graph.
 Unlike such constructs such as Bayesian Networks, a CLD *may* have cycles.
 In fact, the presence of cycles is what makes System Dynamics unique.
 
-Variables are indicated by nodes or vertices as in the first graph of \@ref(fig:systems-fig1).
+Variables are indicated by nodes or vertices as in the first graph of Figure \@ref(fig:systems-fig1).
 In Figure 1, both A and B are variables.
 In the next graph, we see that A influences B.
 Arcs indicate influence between two variables with the arrow indicating the direction of influence.
@@ -160,7 +160,7 @@ It's very easy to misread a CLD and believe that the plus sign (+) indicates "in
 knitr::include_graphics('resources/systems/cld01.png')
 ```
 
-Looking at \@ref(fig:systems-fig2), we see what happens when A decreases, B also decreases.
+Looking at Figure \@ref(fig:systems-fig2), we see what happens when A decreases, B also decreases.
 Positive polarity indicates that two variables move in the same direction.
 Actually, in the "old days", polarity was indicated by "S" (for same) and "O" (for opposite).
 
@@ -168,7 +168,7 @@ Actually, in the "old days", polarity was indicated by "S" (for same) and "O" (f
 knitr::include_graphics('resources/systems/cld02.png')
 ```
 
-In \@ref(fig:systems-fig3), we establish that a different relationship between A and B.
+In Figure \@ref(fig:systems-fig3), we establish that a different relationship between A and B.
 if A increases, B decreases.
 This is the negative polarity as indicated by the negative sign near the arrowhead.
 
@@ -176,7 +176,7 @@ This is the negative polarity as indicated by the negative sign near the arrowhe
 knitr::include_graphics('resources/systems/cld03.png')
 ```
 
-In \@ref(fig:systems-fig4) we can see that A can influence B and, simultaneously, B can influence A.
+In Figure \@ref(fig:systems-fig4) we can see that A can influence B and, simultaneously, B can influence A.
 Such cycles--called *feedback loops*--are an important part of System Dynamics.
 The (+) in the middle indicates that this is a *reinforcing* feedback loop (which we will also indicate with (R)).
 In such a feedback loop, the interactions of the variables reinforce each other: A increases which causes B to increase which causes A to increase and so on.
@@ -185,7 +185,7 @@ In such a feedback loop, the interactions of the variables reinforce each other:
 knitr::include_graphics('resources/systems/cld04.png')
 ```
 
-If there are arcs in the feedback loop with negative polarities, then we may have a *balancing* feedback loop (- or B) as in \@ref(fig:systems-fig5).
+If there are arcs in the feedback loop with negative polarities, then we may have a *balancing* feedback loop (- or B) as in Figure \@ref(fig:systems-fig5).
 This is fairly easy to figure out with only two arcs in the loop, but how does it work with many arcs?
 The rule of thumb is that if there are an *odd* number of negative arcs in the loop, then the feedback loop is balancing; otherwise, it is reinforcing.
 
@@ -215,7 +215,7 @@ First, population itself is kept in check by the relative strengths of the two f
 Second, from a modeling perspective, there are a number of parameters that are exogenous to the system: puberty, birth rates, lifespans, and death rates.
 
 However, we can endogenize a number of these variables by including them as factors in our diagrams.
-In \@ref(fig:systems-fig7), we add at least one perspective on birth rates.
+In Figure \@ref(fig:systems-fig7), we add at least one perspective on birth rates.
 Starting with population, when population increases, resources per person decrease (negative polarity).
 When resources per person increase, life expectancy increases (positive polarity).
 When life expectancy increases, the desired family size decreases (negative polarity).
@@ -249,7 +249,7 @@ In this way, we have endogenized birth rates (although not puberty).
 knitr::include_graphics('resources/systems/cld08.png')
 ```
 
-Next we look at death rates in \@ref(fig:systems-fig9).
+Next we look at death rates in Figure \@ref(fig:systems-fig9).
 This is a lot simpler.
 As life expectancy increases, deaths decrease (negative polarity).
 With three negative polarity arcs, the entire loop is a balancing feedback loop.
@@ -258,7 +258,7 @@ With three negative polarity arcs, the entire loop is a balancing feedback loop.
 knitr::include_graphics('resources/systems/cld09.png')
 ```
 
-Finally, you can follow the entire cycle in \@ref(fig:systems-fig10).
+Finally, you can follow the entire cycle in Figure \@ref(fig:systems-fig10).
 
 ```{r systems-fig10, echo=FALSE, out.width='50%', fig.align='center', fig.cap='Simulating the Expanded Death Cycle'}
 knitr::include_graphics('resources/systems/cld10.png')
