@@ -3,6 +3,7 @@ title: An R Markdown document converted from "source/probability/applications.ip
 output: html_document
 ---
 
+
 ## Applications
 
 We can solidify our understanding of probability, conditional probability and Bayes Rule by going over some problems, some of which are quite famous. We'll start first with some general probability problems and then move in the second part to problems using Bayes Rule.
@@ -105,14 +106,14 @@ We're going to simulate the problem by writing a few functions. The first functi
 
 First some imports...
 
-```{python eval=FALSE}
+```
 from random import randint, uniform
 from collections import defaultdict
 ```
 
 We used `defaultdict` because missing keys are automatically assigned a value of `0` instead of it causing a KeyError.
 
-```{python eval=FALSE}
+```
 def tally_k_birthdays( k):
     counts = defaultdict( int)
     for i in range( 0, k):
@@ -123,13 +124,13 @@ def tally_k_birthdays( k):
 
 Let's see what we get for 10 people:
 
-```{python eval=FALSE}
+```
 tally_k_birthdays( 10)
 ```
 
 Now all we need to do is take this dictionary of values and see if any of the days (we only need one) has a count greater than one which would mean that two (or more) people have the same birthday:
 
-```{python eval=FALSE}
+```
 def identify_same_birthdays( counts_of_birthdays):
     for day in counts_of_birthdays.keys():
         if counts_of_birthdays[ day] > 1:
@@ -139,7 +140,7 @@ def identify_same_birthdays( counts_of_birthdays):
 
 In general, in order to get a good result from a simulation, it must be run multiple times and the results averaged. We write a function to do just that. The arguments are $N$ people and $times$ simulations.
 
-```{python eval=FALSE}
+```
 def sample_group( N, times):
     match = 0.0
     for i in range( times):
@@ -151,7 +152,7 @@ def sample_group( N, times):
 
 We can now run the function and see approximately what the probability is for two people to have the same birthday in a class with $N=26$ students:
 
-```{python eval=FALSE}
+```
 sample_group( 26, 10000)
 ```
 
@@ -183,7 +184,7 @@ First, we have a function that simulates one Monty Hall "Problem". It basically 
 6. if do_switch is True, make the pick equal to the closed curtain. Otherwise, keep it the same.
 7. return if the picked curtain equals the car's curtain (True or False).
 
-```{python eval=FALSE}
+```
 def evaluate_a_monty_hall_scenario( do_switch=False):
     options = {1, 2, 3}
     car = randint( 1, 3)
@@ -197,14 +198,14 @@ def evaluate_a_monty_hall_scenario( do_switch=False):
 
 Let's run it 10 times:
 
-```{python eval=FALSE}
+```
 for i in range( 0, 10):
     print( evaluate_a_monty_hall_scenario(True))
 ```
 
 We're now going to run the Monty Hall problem function 10,000 times and evaluate what happens first, if you don't switch and second, if you switch:
 
-```{python eval=FALSE}
+```
 def evaluate_monty_hall_problem( switch=False):
     trials = 10000
     count = 0
@@ -215,11 +216,11 @@ def evaluate_monty_hall_problem( switch=False):
     return float( count) / trials
 ```
 
-```{python eval=FALSE}
+```
 evaluate_monty_hall_problem()
 ```
 
-```{python eval=FALSE}
+```
 evaluate_monty_hall_problem(True)
 ```
 
@@ -320,7 +321,7 @@ $$P(I|M) = \frac{P(M|I)P(I)}{P(M)}$$
 
 I'm going to start out with a helper function that normalizes a probability distribution the way I have decided to represent it (as a map):
 
-```{python eval=FALSE}
+```
 def normalize( dist):
     normalizer = sum( dist.values())
     for k in dist.keys():
@@ -330,13 +331,13 @@ def normalize( dist):
 
 I'm describing the events as **I**dentical twin or **F**raternal twin. The probabilities come from the Wikipedia article. In Python, it is very convenient to represent a discrete Probability distribution with a Dict where the keys are outcomes {"I", "F"} and the values are the probabilities of those outcomes.
 
-```{python eval=FALSE}
+```
 elvis_prior = {"I": 0.08, "F": 0.92}
 ```
 
 Here we use a Dict to express a likelihood which ends up as a nested Dict. Remember that $P(A|B)$ is a Probability distribution for each value of "B". In this case, the outer key is the "given" so that we can say "given I" and look up the appropriate probability distribution. The inner Dict represents the probability distribution over the events of "A", in this case the sex of the baby, **M**ale or **F**emale.
 
-```{python eval=FALSE}
+```
 elvis_likelihoods = {
   "I": { "M": 1.00, "F": 0.00},
   "F": { "M": 0.50, "F": 0.50}
@@ -369,7 +370,7 @@ $P(A=a_n|B) = \frac{P(B|A=a_n)P(A=a_n)}{P(B)}$
 
 This is what the following function does, although for all values of A and B.
 
-```{python eval=FALSE}
+```
 def query( prior, likelihoods, evidence):
     posterior = {}
     for k in prior.keys():
@@ -380,7 +381,7 @@ def query( prior, likelihoods, evidence):
 
 Now we can print out the prior probability and the posterior probability:
 
-```{python eval=FALSE}
+```
 print( "prior=", elvis_prior)
 print( "posterior=", query( elvis_prior, elvis_likelihoods, "M"))
 ```
@@ -415,28 +416,28 @@ You should try to solve this for yourself before looking at my solution.
 
 Here is the prior distribution for the 1994 bag:
 
-```{python eval=FALSE}
+```
 mix94 = dict(brown=0.3, yellow=0.2, red=0.2, green=0.1, orange=0.1, tan=0.1)
 mix94
 ```
 
 and the prior distribution for the 1996 bag:
 
-```{python eval=FALSE}
+```
 mix96 = dict(blue=0.24, green=0.2, orange=0.16, yellow=0.14, red=0.13, brown=0.13)
 mix96
 ```
 
 Now, my two possible events are: either the first bag is the 1994 bag (A) or the first bag is the 1996 bag (B):
 
-```{python eval=FALSE}
+```
 A = dict(bag1=mix94, bag2=mix96)
 B = dict(bag1=mix96, bag2=mix94)
 ```
 
 which gives me my likelihoods:
 
-```{python eval=FALSE}
+```
 m_m_likelihoods = {"A": A, "B": B}
 m_m_likelihoods
 ```
@@ -447,19 +448,19 @@ Given that event A happened (1994 bag), then the probability of picking a yellow
 
 Our prior is 50/50 for each of the events A and B because there are two bags.
 
-```{python eval=FALSE}
+```
 m_m_priors = {"A": 0.5, "B": 0.5}
 ```
 
 Our evidence is that I took a yellow M&M out of Bag 1 and a green M&M out of Bag 2:
 
-```{python eval=FALSE}
+```
 m_m_evidences = [('bag1', 'yellow'), ('bag2', 'green')]
 ```
 
 And now some code to massage it all together:
 
-```{python eval=FALSE}
+```
 from copy import deepcopy
 
 def calculate_m_m_posteriors( priors, likelihoods, evidences):
@@ -476,7 +477,7 @@ def calculate_m_m_posteriors( priors, likelihoods, evidences):
     return posteriors
 ```
 
-```{python eval=FALSE}
+```
 print( "prior", m_m_priors)
 calculate_m_m_posteriors( m_m_priors, m_m_likelihoods, m_m_evidences)
 ```
