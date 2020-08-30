@@ -1,0 +1,138 @@
+---
+title: An R Markdown document converted from "source/probability/types.ipynb"
+output: html_document
+---
+
+## Types of Probability
+
+When we have a complex event space, we may have different *types* of probability. These probability types cover *joint* probability, *conditional* probability, and *marginal* or *prior* probability.
+
+### Joint Probability
+
+Consider a social and economic process whereby certain areas are more or less densely populated, have more jobs or better jobs, or have different kinds of industries. We can think of these areas as having two properties, **Community** and **Income**.
+
+We may not have sufficient information to characterize this process (a system that changes over time) for a particular area and so we want to use probability to describe how plausible certain occurrences of these *joint* events are. The possible events for Community (C) are {urban, suburban, rural} and the possible events for Income are  {low, high}. Taken together these define an event space that is the cross product of the two sets {(urban, low), (urban, high),...}.
+
+If this seems weird to you, it is! Normally we work the other way around. We work from data (events) about communities and *infer* these proportions. Inference is covered in a later chapter. I want you to get used to use probability for things other than card games.
+
+The following **joint probability distribution** over these two sets measures our belief that the next observed area will some combination of properties for Community and Income:
+
+| area | low | high |
+|:----:|:---:|:----:|
+| rural | 0.04 | 0.02 |
+|suburban | 0.19 | 0.22 |
+|urban | 0.29 | 0.24 |
+
+Each entry in the table is a particular probability estimate such as:
+
+$P(C=urban, I=high) = P(urban, high) =  0.24$
+
+$P(C=rural, I=low) = P(rural, low) = 0.04$
+
+If we want to know the probability of the event (urban, low) **or** (urban, high) then by axiom #3, we have: 
+
+$P(urban, low \cup urban, high) = P(urban, low) + P(urban, high) = 0.29 + 0.24 = 0.53$
+
+and similarly, if we want to know the probability of (urban, high) **or** (suburban, high) we can calculate it as:
+
+$P(urban, high \cup suburban, high) = P(urban, high) + P(suburban, high) = 0.24 + 0.22 = 0.46$
+
+This seems a bit unnatural at first because it doesn't, on the surface, appear to be the same as flipping a coin. But the fact that there are 6 numbers (5 of which are independent, the 6th is derivable from the axiom #2) instead of 1 doesn't change anything. 
+
+The main differences are:
+
+1. The process involves the development of geographic areas (instead of the physical process of flipping a coin).
+2. There are two (joint) events being measured (instead of just the one, heads or tails).
+
+As it turns out, *calculating* these probabilities from data is one of the simplest forms of modeling. We will discuss this later.
+
+On a final note, there is no limit (except perhaps processing power, space, or credulity) to the number of variables you can have in a joint probability distribution. $P(A, B)$ is one. $P(A, B, C)$ is one. And $P(A, B, C, D, E, F, G)$ is one. Of course, as you add more variables, the size of the corresponding probability table increases exponentially.
+
+### Conditional Probability
+
+$P(C, I)$ is a **joint probability distribution** over all the possible combinations of Community and Income. But what if we already know the Income? This is denoted by $P(C | I)$ and is called a **conditional probability distribution** because we "condition" our uncertainty on the information we have.
+
+When we look at a specific event, a **joint** probability might be something like $P(urban, low)$. This is the probability of the next geographic area being both an urban community and low income *if* we don't know either value. However, the **conditional** probability $P(urban | low)$ is the probability of the next geographic areas being both an urban community and low income if we already know that it's low income. These two probabilities will not necessarily be the same (a point to which we will return later).
+
+Conditional probability effectively focuses our attention on a subset of the joint probability space where some of our uncertainty is resolved by knowing *some* of what happened. Remember that *joint* probability is the probability of any combination of events, assuming we know nothing. But if we know that $income = low$ then we do not need to look at $income = high$ anymore because it's not possible. We know that that event is not going to happen and thus we can ignore it. This is true whether there are 2 possible events or 100 and whether we know the values for 1 or 99. Whenever we find out the value of a variable--that some event has happened--we can ignore all other values for that variable as no longer being possible.
+
+When we do this, however, we're left with improper probability distributions. By the 2nd Axiom of Probability, all probability distributions must sum to 1 therefore we need to normalize the remaining probabilities (of event combinations that *can* happen). We do this by dividing through by the sum of the remaining possible events.
+
+More formally, the definition of conditional probability is:
+
+$P(A|B) = \frac{P(A, B)}{P(B)}$
+
+and if you play with the math a bit, you will see that this is the same thing. Don't be confused by the seeming division of a probability distribution by another probability distribution. This is just a shorthand for element-wise division. Therefore, using the joint probability table from above, we can calculate:
+
+$P(urban|low) = P(urban, low)/P(low) = 0.29/0.52 = 0.56$
+
+Our conditional probability table, $P(Community|Income)$, describes the uncertainty under any outcome for Income:
+
+**Conditional Probability**, $P(Community|Income)$
+
+| area | low | high |
+|:----:|:---:|:----:|
+| rural | 0.08 | 0.05 |
+|suburban | 0.36 | 0.46 |
+|urban | 0.56 | 0.50 |
+
+In this case, $P(Community|Income)$ has 2 probability distributions (one for each possible value of Income). In this case, each column sums to 1.
+
+We can do this for Community as well:
+
+**Conditional Probability**, $P(Income|Community)$
+
+| area | low | high |
+|:----:|:---:|:----:|
+| rural | 0.65 | 0.35 |
+|suburban | 0.46 | 0.54 |
+|urban | 0.54 | 0.46 |
+
+But this means that the table above actually has *three* separate probability distributions. One for each possible outcome of Community and each distribution itself (row in this case) adheres to Axiom #2 (they sum to 1).
+
+In general, with conditional probabilities, knowing that some event occurs often changes our information about the certainty or uncertainty of another event. However, in general, we **cannot** say anything about whether or not:
+
+$$P(A) <=> P(A | B)$$
+
+Conditional probabilities are perfectly general.
+
+Just as we can have a joint probability distribution over many different event spaces such as P(A, B, C, D, E, F) we can have a conditional probability distribution where the result or value for some (at least one) of the sets is known. For example, we might know the values of $C$ and $D$:
+
+$P(A, B | C, D) = \frac{P(A, B, C, D)}{P(C, D)}$
+
+### Marginal or Prior Probability
+
+When dealing with a joint probability distribution over many sets, there may sometimes be sets that we don't care about, that is, we're only interested in the probabilities of some subset of joint event space. The simplest example is having a joint probability distribution $P(A, B)$ and only being interested in the probability distribution $P(A)$ or $P(B)$. In this case, we can *marginalize* out the events we are not interested in. "Marginalization" comes from the actual practice of calculating marginal values/probabilities in the actual margins of books and ledgers.
+
+For example, if we have our joint probability distribution $P(C, I)$ and we only care about community, $C$, we can marginalize out income:
+
+$P(urban, low \cup urban, high) = P(urban, low) + P(urban, high) = 0.29 + 0.24 = 0.53$
+
+$P(suburban, low \cup suburban, high) = P(suburban, low) + P(suburban, high) = 0.19 + 0.22 = 0.41$
+
+$P(rural, low \cup rural, high) = P(rural, low) + P(rural, high) = 0.04 + 0.02 = 0.06$
+
+
+which leads to the following:
+
+**Marginal Probability**, $P(Community)$
+
+| area | any |
+|:----:|:---:|
+| rural | 0.06 |
+|suburban | 0.41 |
+|urban | 0.53 |
+
+This follows from the axioms of probability. We can also do this for income:
+
+**Marginal Probability**, $P(Income)$
+
+| area | low | high |
+|:----:|:---:|:----:|
+| any | 0.52 | 0.48 |
+
+
+which strangely leads us back to coin flipping.
+
+According to Jaynes, you can think of P(heads) as a marginalization over everything we don't know or don't care about in a larger joint probability distribution such as P(heads, gravity, Earth, Jim, left handed, ...).
+

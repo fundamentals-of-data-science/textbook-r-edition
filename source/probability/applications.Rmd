@@ -1,0 +1,494 @@
+---
+title: An R Markdown document converted from "source/probability/applications.ipynb"
+output: html_document
+---
+
+## Applications
+
+We can solidify our understanding of probability, conditional probability and Bayes Rule by going over some problems, some of which are quite famous. We'll start first with some general probability problems and then move in the second part to problems using Bayes Rule.
+
+Most of these problems come from Allen Downey's excellent book [Think Bayes](http://greenteapress.com/wp/think-bayes/).
+
+Some of these problems are just calculations, either by hand or by computer. Others involve answering questions with simulations in order to calculate probabilities. You may be called upon to do something similar as a data scientist. For example, you have just fielded an advertising campaign in 20 major cities. Testing showed that advertising campaign was 10 percent better than the previous one. However, the last three weeks of returns in New York have been below average. What is the probability of this happening given that the campaign really is 10 percent better?
+
+### Applications in General Probability
+
+These problems are general probability problems (although the Monty Hall problem can be solved using Bayes Rule).
+
+#### A Girl Named Florida
+
+Consider the following problems: we have a family with two children.
+
+* What is the probability that they are both girls?
+
+To answer this question, we have have to make some assumptions about the probability of a child being either a boy or girl (which we will take to mean either XX or XY chromosomes). The generally accepted probabilities are P(boy) = 0.5 and P(girl) = 0.5 (ignoring other chromosomal possibilities).
+
+Recall our definition of independence. Two sets of events, $A$ and $B$, are independent if the following holds true:
+
+$$P(A, B) = P(A)P(B)$$
+
+but that's how we determine that A and B are independent. If we *assume* that the events are independent, then we can turn it around to calculate the probability of the joint event:
+
+$$P(A)P(B) = P(A, B)$$
+
+Here $A$ is the "sex of the first child" and $B$ is the "sex of the second child". This means we can take P(A=girl) as 0.5 and P(B=girl) as 0.5--shortened to P(girl) x P(girl)-- which equals 0.5 x 0.5 = 0.25.
+
+Note that if we wanted to calculate the probability of them being different sexes, then we'd have to calculate the probability of having a boy then a girl (0.5 x 0.5 = 0.25) and the probability of having a girl then a boy (0.5 x 0.5 = 0.25) and combine them based on the Additive Law of Probability: 0.25 + 0.25 = 0.50.
+
+But remember how I said probability is just counting?
+
+There are 4 possibilities:
+
+1. Boy, Girl.
+2. Girl, Boy.
+3. Girl, Girl.
+4. Boy, Boy.
+
+There is only one way in which both children are girls so the probability of two girls is 1/4 = 0.25. There are two ways in which the children are mixed sexes so the probability of that joint event is 2/4 = 1/2 = 0.5.
+
+
+* What is the probability that they are both girls given that at least one is a girl?
+
+Now there are only 3 possibilities--the ones that include a Girl as either the first or the second birth:
+
+1. Boy, Girl.
+2. Girl, Boy.
+3. Girl, Girl.
+
+Using the counting method, we can see that there is only one way to get the result we're interested in and three possible outcomes so the probability is 1/3.
+
+Using the mathy way, we know from above that probability of the individual outcomes are each 1/4 or 0.25:
+
+1. Boy, Girl = 1/4
+2. Girl, Boy. = 1/4
+3. Girl, Girl. = 1/4
+
+However, since we have ruled out the {Boy, Boy} possibility by assumption, we have to renormalize the probabilities. Normalization just means "make all the probabilities add up to 1 again" and  you do this by adding the probabilities together (which is 3/4) and dividing each original probability by this *normalizer*:
+
+1. Boy, Girl = 1/4 // 3/4 = 1/3
+2. Girl, Boy. = 1/4 // 3/4 = 1/3
+3. Girl, Girl. = 1/4 // 3/4 = 1/3
+
+And we get 1/3 as before. The reason we show both ways to get the answer is because, as you might expect, there are cases--most cases--where the counting approach isn't tractable.
+
+* What is the probability that they are both girls given that the oldest (first) is a girl?
+
+We do the same thing again except that any outcome that has a Boy as the oldest is removed:
+
+1. Girl, Boy. = 1/4
+2. Girl, Girl. = 1/4
+
+And again, we need to have our probabilities add up to 1 so we normalize them:
+
+1. Girl, Boy. = 1/4 // 2/4 = 1/2
+2. Girl, Girl. = 1/4 // 2/4 = 1/2
+
+If you think about it a second, this makes perfect sense...the events are independent so knowing that the first is a girl doesn't give us any information about the second child's sex.
+
+That was a fairly typical probability problem. There is a crazy variant that asks:
+
+* What is the probability that they are both girls given that one of them is a girl named Florida?
+
+Think about it. Does the name change anything?
+
+We're now going to switch to problems where simulation is often a useful tool. If you ever have a probability problem that you can't quite formulate right or if someone doesn't believe your answer, think: can I simulate this?
+
+#### Birthday Problem
+
+The Birthday Problem is as follows: what is the probability that two people in a given group of size $N$, have the same birthday (month and day)?
+
+1. Guess. What do you think the probability is? 10%, 20%, 30%...100%?
+2. Think about how you might answer this mathematically.
+3. Think about how you might solve this easily as a simulation. What assumptions do you need to make?
+
+We're going to simulate the problem by writing a few functions. The first function takes $k$ persons as an argument and assigns them randomly to one of the 365 days of the year (we ignore leap years). As we do so, we count how many people have that birthday.
+
+First some imports...
+
+```{python eval=FALSE}
+from random import randint, uniform
+from collections import defaultdict
+```
+
+We used `defaultdict` because missing keys are automatically assigned a value of `0` instead of it causing a KeyError.
+
+```{python eval=FALSE}
+def tally_k_birthdays( k):
+    counts = defaultdict( int)
+    for i in range( 0, k):
+        birthday = randint( 1, 365)
+        counts[ birthday] += 1
+    return counts
+```
+
+Let's see what we get for 10 people:
+
+```{python eval=FALSE}
+tally_k_birthdays( 10)
+```
+
+Now all we need to do is take this dictionary of values and see if any of the days (we only need one) has a count greater than one which would mean that two (or more) people have the same birthday:
+
+```{python eval=FALSE}
+def identify_same_birthdays( counts_of_birthdays):
+    for day in counts_of_birthdays.keys():
+        if counts_of_birthdays[ day] > 1:
+            return True
+    return False
+```
+
+In general, in order to get a good result from a simulation, it must be run multiple times and the results averaged. We write a function to do just that. The arguments are $N$ people and $times$ simulations.
+
+```{python eval=FALSE}
+def sample_group( N, times):
+    match = 0.0
+    for i in range( times):
+        birthday_count = tally_k_birthdays( N)
+        if identify_same_birthdays( birthday_count):
+            match += 1.0
+    return match / times
+```
+
+We can now run the function and see approximately what the probability is for two people to have the same birthday in a class with $N=26$ students:
+
+```{python eval=FALSE}
+sample_group( 26, 10000)
+```
+
+It's much more probable than people usually think.
+
+This is a good example of a simple simulation for a system process. Again, in theory, everything is fairly deterministic. Parents decided to have children, the children were born on certain days, the children grew up and where in a particular class (one such situation) or they got older and went to university (another situation) or took up an interest in art and when to an art gallery (another such situation) and in all cases the simulation works.
+
+It doesn't work if an assumption if violated. If the situation is a Meetup for People born in March, we would need an entirely different situation.
+
+1. Can you reprogram the simulation to see how many people it takes to have a 50% probability of someone with the same birthday, if everyone is born in the same month?
+
+#### Monty Hall Problem
+
+Monty Hall was the host for *Let's Make a Deal* before Wayne Brady. One of the "bits" on the show involved picking a curtain in hopes of winning a great prize like a car and this probability problem is based on it. It's actually a very famous problem.
+
+There are three curtains: 1, 2, and 3. Behind one of those curtains is a car. On the show, the other curtains often had gag gifts behind them like a goat but we assume they're empty. The contestant picks the curtain they believe hides the car. After picking, Monty reveals what is behind one of the other curtains. One important assumption is that if the contestant *has* picked the car, Monty reveals one of the other two curtains at random.
+
+The contestant is then given the option to either stick with the curtain they picked or switch to the remaining curtain. The question is this: should the contestant switch? What do you think?
+
+There are a number of ways to answer this question but we're going to use simulation because that's often the most definitive. In fact, Paul Erdos, the famous mathematician, would not believe the correct answer until it was simulated.
+
+First, we have a function that simulates one Monty Hall "Problem". It basically says:
+
+1. set up the problem
+2. place the car at random.
+3. generate a random contestant pick.
+4. figure out which curtain to reveal.
+5. figure out which curtain is closed.
+6. if do_switch is True, make the pick equal to the closed curtain. Otherwise, keep it the same.
+7. return if the picked curtain equals the car's curtain (True or False).
+
+```{python eval=FALSE}
+def evaluate_a_monty_hall_scenario( do_switch=False):
+    options = {1, 2, 3}
+    car = randint( 1, 3)
+    pick = randint( 1, 3)
+    opened = list( options.difference( {car}).difference( {pick}))[0]
+    closed = list( options.difference( {pick}).difference( {opened}))[0]
+    if do_switch:
+        pick = closed
+    return car == pick
+```
+
+Let's run it 10 times:
+
+```{python eval=FALSE}
+for i in range( 0, 10):
+    print( evaluate_a_monty_hall_scenario(True))
+```
+
+We're now going to run the Monty Hall problem function 10,000 times and evaluate what happens first, if you don't switch and second, if you switch:
+
+```{python eval=FALSE}
+def evaluate_monty_hall_problem( switch=False):
+    trials = 10000
+    count = 0
+    for i in range( 0, trials):
+        result = evaluate_a_monty_hall_scenario( switch)
+        if result:
+            count += 1
+    return float( count) / trials
+```
+
+```{python eval=FALSE}
+evaluate_monty_hall_problem()
+```
+
+```{python eval=FALSE}
+evaluate_monty_hall_problem(True)
+```
+
+And there you have it, if you switch, you win the car 66% of the time.
+
+### Applications of Bayes Rule
+
+Speaking of switching, one of the main types of problems we'll be solving are problems involving Bayes Rule. In fact, Bayesian Inference depends entirely on understanding Bayes Rule and evaluating it for a large number of possibilities. We'll start out with smaller problems.
+
+For whatever reason, Bayes Rule examples are either weather or medical tests. We'll start with the weather:
+
+#### Rain or Shine
+
+Sam is getting married tomorrow in an outdoor ceremony in the desert. In recent years, it has only rained 5 days per year. Unfortunately, the meteorologist has predicted rain for tomorrow. Should Sam rent a tent for the ceremony?
+
+We can solve this problem using Bayes Rule which remember is:
+
+$$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$$
+
+But instead what we want is:
+
+$$P(W|F) = \frac{P(F|W)P(W)}{P(F)}$$
+
+where $W$ is weather (rain or shine) and $F$ is forecast (rain or shine). Remember that $P(W)$ in the numerator is our *prior* probability. What *is* our prior probability? Well, it only rains 5 days a year on average:
+
+| rain | shine |
+|:----:|:-----:|
+| 5/365 = 0.0137 | 360/365 = 0.9863 |
+
+I think this is what Sam had in mind when he planned his wedding.
+
+But now he needs to take new evidence into account: a forecast of rain. The likelihood $P(F|W)$ is essentially the probability of the meteorologist being correct: given that it rained, what is the probability that it was forecast? Sam looks this up on the Internet.
+
+|  F  | rain | shine |
+|:---:|:----:|:-----:|
+|rain |  0.8 | 0.2   |
+|shine | 0.2 | 0.8   |
+
+What does this mean? *Given* that it rained, there is an 80% chance there was a forecast of rain:
+
+$F(F=rain|W=rain) = 0.8$
+
+Because it *will* be confusing, we do not take shortcuts here. We will use the longhand notation, F=rain and W=rain, to distinguish the two events. Up above, we had Bayes Rule defined over entire random variables. 
+
+What does it look like for the specific outcome we're interested in?
+
+$$P(W=rain|F=rain) = \frac{P(F=rain|W=rain)P(W=rain)}{P(F=rain)}$$
+
+We have everything we need except the denominator. We can use total probability for it, though:
+
+$P(F=rain) = P(F=rain|W=rain)P(W=rain) + P(F=rain|W=shine)P(W=shine)$
+
+$0.8 \times 0.0137 + 0.2 \times 0.9863 = 0.208$
+
+and now we have:
+
+$P(W=rain|F=rain) = \frac{0.8 \times 0.0137}{0.208} = 0.053$
+
+So really, Sam should just go ahead with the wedding (at least from a weather perspective).
+
+#### Breast Cancer
+
+The logic underlying this problem is why certain routine screenings for breast cancer were discontinued. The numbers, however, are made up.
+
+1% of women at age 40 who participate in routine screening have breast cancer. 80% of women with breast cancer will get positive mammographies. 9.6% of women without breast cancer will also get positive mammographies. A woman in the age group had a positive mammography. What is the probability of her having breast cancer?
+
+We have two variables, each with two outcomes: $M$ is {pos, neg}, and $C$ is {yes, no}. As before, we need to set up Bayes Rule and determine either what information we have and what information we need to calculate.
+
+$$P(yes|pos) = \frac{P(pos|yes)P(yes)}{P(pos)}$$
+
+We have the prior, $P(yes)$ which is simply 0.01. We have the likelihood we need which is established in the second sentence: $P(pos|yes)$ = 0.8 (which means that $P(neg|yes)$ = 0.2. We don't have $P(pos)$. We will need to use total probability again.
+
+$P(pos) = P(pos|yes)P(yes) + P(pos|no)P(no)$
+
+We have $P(pos|no)$ from the 3rd sentence: 0.096. Note that this clearly shows where total probability comes from. If we want to calculate the probability of a positive test result, we need to take into account all the possible sources of positive test results. These come from those with cancer who get a positive test result (the first term) and those without cancer who get a positive test result (the second term). The probability of not having cancer is just 1 - P(yes).
+
+$P(pos) = 0.8 \times 0.01 + 0.096 \times 0.99 = 0.103$
+
+and now we can just plug in the numbers.
+
+$P(yes|pos) = \frac{0.8 * 0.01}{0.103} = 0.078$
+
+This result makes an important assumption, though, the only information about this woman's status is that this was a routine screening. Why might this not be the case?
+
+OK, we're computer scientists...enough math. We can let computers do the math.
+
+#### Elvis
+
+Apparently Elvis was one of a set of twins. He had a twin brother who died at birth. We want to know the probability that Elvis had an identical twin. This isn't really enough information to answer anything so...
+
+Wikipedia to the rescue..."Twins are estimated to be approximately 1.9% of the world population, with monozygotic twins making up 0.2% of the total, 8% of all twins".
+
+You should solve this by hand right now, writing out the problem. It might surprise you how difficult it is to get started. Consider the following...what is the event we want to know about and what is the evidence?
+
+So the evidence is that the child was male and the event we're trying to determine the probability of is that Elvis and the child were identical twins:
+
+$$P(I|M) = \frac{P(M|I)P(I)}{P(M)}$$
+
+I'm going to start out with a helper function that normalizes a probability distribution the way I have decided to represent it (as a map):
+
+```{python eval=FALSE}
+def normalize( dist):
+    normalizer = sum( dist.values())
+    for k in dist.keys():
+        dist[ k] = dist[ k] / normalizer
+    return dist ## don't need to do this.
+```
+
+I'm describing the events as **I**dentical twin or **F**raternal twin. The probabilities come from the Wikipedia article. In Python, it is very convenient to represent a discrete Probability distribution with a Dict where the keys are outcomes {"I", "F"} and the values are the probabilities of those outcomes.
+
+```{python eval=FALSE}
+elvis_prior = {"I": 0.08, "F": 0.92}
+```
+
+Here we use a Dict to express a likelihood which ends up as a nested Dict. Remember that $P(A|B)$ is a Probability distribution for each value of "B". In this case, the outer key is the "given" so that we can say "given I" and look up the appropriate probability distribution. The inner Dict represents the probability distribution over the events of "A", in this case the sex of the baby, **M**ale or **F**emale.
+
+```{python eval=FALSE}
+elvis_likelihoods = {
+  "I": { "M": 1.00, "F": 0.00},
+  "F": { "M": 0.50, "F": 0.50}
+}
+```
+
+Below is a function that will calculate the posterior probability for the entire probability distribution (over all events). As we've mentioned before, in Bayes Rule:
+
+$P(A|B) = \frac{P(B|A)P(A)}{P(B)}$
+
+we are calculating an entire posterior probability *distribution*...a probability for each value of A given each value of B. Additionally, it is unlikely that we know the value of the normalizer $P(B)$ directly. However, we can calculate $P(B)$ using the Rule of Total Probability:
+
+$P(B) = P(B|A=a_1)P(A=a_1) + P(B|A=a_2)P(A=a_2) + ... + $P(B|A=a_n)P(a_n)$
+
+but it turns out that if we are interested in the probability of every hypothesis in A, we are going to calculate all of these values anyway. We don't need to go through any extra effort. First we note that if we are only concerned about *order* we do not need to normalize so we have:
+
+$P(A=a_1|B) \propto P(B|A=a_1)P(A=a_1)$
+
+$P(A=a_2|B) \propto P(B|A=a_2)P(A=a_2)$
+
+$P(A=a_n|B) \propto P(B|A=a_n)P(A=a_n)$
+
+where $\propto$ means "proportional to". We can calculate all of these without calculating the normalizer, $P(B)$. But having calculated all those terms, we have calculated the terms we need to compute the normalizer and calculate the actual probabilities:
+
+$P(A=a_1|B) = \frac{P(B|A=a_1)P(A=a_1)}{P(B)}$
+
+$P(A=a_2|B) = \frac{P(B|A=a_2)P(A=a_2)}{P(B)}$
+
+$P(A=a_n|B) = \frac{P(B|A=a_n)P(A=a_n)}{P(B)}$
+
+This is what the following function does, although for all values of A and B.
+
+```{python eval=FALSE}
+def query( prior, likelihoods, evidence):
+    posterior = {}
+    for k in prior.keys():
+        posterior[ k] = likelihoods[ k][ evidence] * prior[ k]
+    normalize( posterior)
+    return posterior
+```
+
+Now we can print out the prior probability and the posterior probability:
+
+```{python eval=FALSE}
+print( "prior=", elvis_prior)
+print( "posterior=", query( elvis_prior, elvis_likelihoods, "M"))
+```
+
+The evidence (that the other child was a boy), increases the probability that they were identical twins (if the other child had been female, it would have been impossible).
+
+What other piece of evidence is implicit in this calculation?
+
+#### M & M's
+
+Here is a bit more challenging problem. 
+
+A friend shows me two bags of M&M's and tells me that one is from 1994 and the other is from 1996. He won't tell me which is which but gives me an M&M from each bag. Which bag is which?
+
+So the first step is map out the events we're trying to predict and the evidence. I'll use the same basic approach as before, representing probability distributions as Dicts.
+
+The key information, however, is that the blue M&M was introduced in 1995. Before that the color mixes in the bags where:
+
+| color | 1994 | 1996 |
+|:-----:|:----:|:----:|
+| brown | 30% | 13%  |
+| yellow | 20% | 14% |
+| red | 20% | 13% |
+| green | 10% | 20% |
+| orange | 10% | 16% |
+| tan | 10% | 0% |
+| blue | 0% | 24% |
+
+(I'm not sure where this data came from!)
+
+You should try to solve this for yourself before looking at my solution.
+
+Here is the prior distribution for the 1994 bag:
+
+```{python eval=FALSE}
+mix94 = dict(brown=0.3, yellow=0.2, red=0.2, green=0.1, orange=0.1, tan=0.1)
+mix94
+```
+
+and the prior distribution for the 1996 bag:
+
+```{python eval=FALSE}
+mix96 = dict(blue=0.24, green=0.2, orange=0.16, yellow=0.14, red=0.13, brown=0.13)
+mix96
+```
+
+Now, my two possible events are: either the first bag is the 1994 bag (A) or the first bag is the 1996 bag (B):
+
+```{python eval=FALSE}
+A = dict(bag1=mix94, bag2=mix96)
+B = dict(bag1=mix96, bag2=mix94)
+```
+
+which gives me my likelihoods:
+
+```{python eval=FALSE}
+m_m_likelihoods = {"A": A, "B": B}
+m_m_likelihoods
+```
+
+This is a more complex likelihood than we're used to seeing. 
+
+Given that event A happened (1994 bag), then the probability of picking a yellow M&M from that bag is 20%. Given that event B happened (1996 bag), then the probability of picking a yellow M&M out of that bag is 14%.
+
+Our prior is 50/50 for each of the events A and B because there are two bags.
+
+```{python eval=FALSE}
+m_m_priors = {"A": 0.5, "B": 0.5}
+```
+
+Our evidence is that I took a yellow M&M out of Bag 1 and a green M&M out of Bag 2:
+
+```{python eval=FALSE}
+m_m_evidences = [('bag1', 'yellow'), ('bag2', 'green')]
+```
+
+And now some code to massage it all together:
+
+```{python eval=FALSE}
+from copy import deepcopy
+
+def calculate_m_m_posteriors( priors, likelihoods, evidences):
+    posteriors = {}
+    current_priors = deepcopy( priors)
+    for evidence in evidences:
+        bag, mnm = evidence
+        for hypothesis in priors.keys():
+            posteriors[ hypothesis] = likelihoods[ hypothesis][ bag][ mnm] \
+              * current_priors[ hypothesis]
+        normalize( posteriors)
+        current_priors = posteriors
+        print( "evidence=", evidence, "posterior=", posteriors)
+    return posteriors
+```
+
+```{python eval=FALSE}
+print( "prior", m_m_priors)
+calculate_m_m_posteriors( m_m_priors, m_m_likelihoods, m_m_evidences)
+```
+
+Based on the evidence, the more likely event is "A"...that the first bag is the 1994 bag of M&Ms and the second bag is the 1996 bag of M&Ms.
+
+One special thing to note about Bayes Rule is that it doesn't matter if you take the evidence altogether or piece by piece (no pun intended). You will always get the same result. It's slightly easier in this case to cycle through the evidence and use the posterior distribution that results as the *prior* distribution for the next calculation.
+
+This is the beauty of Bayes Rule (and makes it slightly easier to program).
+
+It is always worth noting that in all cases we used probability to deal with systems--processes--exhibiting uncertainty whether it was a breast cancer testing process, the weather, Elvis's deceased twin or M&M's.
+
+1. Can you solve the Monty Hall problem using Bayes Rule?
+2. Can you identify--even in the most general terms--the processes underlying each of these problems?
+

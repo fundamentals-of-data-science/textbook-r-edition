@@ -1,0 +1,37 @@
+---
+title: An R Markdown document converted from "source/probability/conclusion.ipynb"
+output: html_document
+---
+
+## Conclusion
+
+We covered a lot of ground in this chapter from the basic ideas of probability to fallacies in probabilistic reasoning. Still, probability is a fundamental tool in data science. Returning to our definition of data science, it says:
+
+> Data science is the application of math and computers to solve problems that stem from a lack of knowledge, constrained by the small number of people with any interest in the answers.
+
+The fundamental problem of Science is extrapolating general conclusions from specific data sets. That is, inference. Probability is our fundamental tool for dealing with the problem of inference because it allows us to model our uncertainty in a very rigorous way. Still...it's not a panacea. It does not magically make inference deductive instead of inductive.
+
+Although the types, rules and laws of probability are important, the most important part of this chapter is Bayes Rule (or Theorem). Bayes Rule allows us tells us how to update our beliefs based on evidence and forms the basis for Statistical Inference discussed in this book.
+
+#S## Review
+
+*When asked to give an example, do not use dice, coins or cards (or any gambling device).*
+
+1. Why is a coin flip deterministic but we still need probability to model it?
+2. What is our working definition of probability?
+3. If $A = {a_1, a_2, a_3}$ and $B = {b_1, b_2}$, then answer the following questions:
+    1. What does $P(A, B)$ denote?
+    2. What does $P(A)$ denote? How did we arrive at it from $P(A, B)$?
+    3. What does $P(A=a_1$) denote?
+    4. What does $P(a_1)$ denote? Why should we be careful when using a "shorthand"?
+    5. What does $P(A|B)$ denote? How many probability distributions does it represent?
+    6. What does $P(A|B)P(B)$ denote? Write it out.
+    7. Express $P(A)$ using the Total Probability.
+4. What is the difference between an **outcome** and an **event**? Give an example not shown elsewhere.
+5. Give an example of the **independence** of two outcomes.
+6. Give an example of **conditional independence** of three outcomes.
+7. What is the **Gambler's Fallacy**?
+8. What is the **Inverse Probability Fallacy**?
+9. What is the **Prosecutor's Fallacy**?
+10. Joe has been randomly selected for drug testing from a population that has about 3% heroin use.  Joe tests positive for heroin use ($u$). The test used correctly identifies users 95% of the time $P(+|u) = 0.95$ and correctly identifies non-users 90% of the time $P(-|c) = 0.90$ ($c$ for "clean"). What is the probability that Joe is using heroin $P(u|+)$? What are the increment and total evidences in this problem?
+

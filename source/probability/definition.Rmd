@@ -1,0 +1,36 @@
+---
+title: An R Markdown document converted from "source/probability/definition.ipynb"
+output: html_document
+---
+
+## Definition of Probability
+
+Data is ultimately evidence for a claim. In Data Science, we want to use data to establish claims that answer a question or solve a problem. The *degree* to which data is supports a claim could be called the claim's *plausibilty*. As we gather data, some claims will be more plausible than others.
+
+Our tool for dealing with plausibility is *probability*. Following [Edwin Jaynes](https://en.wikipedia.org/wiki/Edwin_Thompson_Jaynes), we see probability as an extension of logic from claims that are true or false to claims that have different degrees of support.
+
+Consider the following syllogism in logic:
+
+1. If something is a person, it is mortal.
+2. Socrates is a person.
+3. Socrates is mortal.
+
+This is an example of *modus ponens*. Now consider the following syllogism:
+
+1. If something is a swan, it is white.
+2. This animal is a swan.
+3. This animal is white.
+
+Of course, when this syllogism was framed, Australia had not yet been discovered by Europeans. However, when the Europeans arrived, they found black swans. The syllogism is now false because the first statement is false. In logic, veracity is an all or nothing quality. Statements are true or false.
+
+While there are various methods of handling degrees of truth, we will focus in this text on probability. Probability permits us to work with statements like the following:
+
+1. If something is a swan, it is likely to be white.
+2. This animal is a swan.
+3. It is likely to be white.
+
+Probability enables us to work in a world where the evidence is not clear cut and only lends partial support--plausibility--to a claim. The evidence might also support multiple claims to varying degrees preventing us from being absolutely certain in our decisions.
+
+In this chapter we will discuss the basics of probability. In the next chapter, we will combine probability and systems thinking to talk about *stochastic processes*. In a later chapter, we will return to probability and talk about the continuous version of *modus ponens*, Bayes Rule and statistical inference.
+
+

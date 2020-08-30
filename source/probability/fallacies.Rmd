@@ -1,0 +1,77 @@
+---
+title: An R Markdown document converted from "source/probability/fallacies.ipynb"
+output: html_document
+---
+
+## Probabilistic Fallacies
+
+As it turns out, people in general are not particularly good with probabilities and make quite a few mistakes. These mistakes are *fallacies* in probabilistic reasoning just as there are reasoning and argument errors in general (for example, *ad hominem* arguments).
+
+### Conjunction Fallacy
+
+Monotonicity plays a very important role in judging the probabilities of events. Perhaps the most famous example arises in the form of the Conjunction Fallacy illustrated as follows:
+
+> Linda is 31 years old, single, outspoken, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice and participated in anti-nuclear demonstrations.
+
+>Which is more probable?
+
+>1. Linda is a bank teller.
+>2. Linda is a bank teller and active in the feminist movement.
+
+The majority of people, when asked, picked #2 but this cannot be. If B is the set of all tellers then the set of feminist bank tellers is likely smaller, a subset of A of B. It cannot be *larger*. Being an element of A cannot be more probable than being an element of A and B.
+
+This basically says that $P(A=a) <= P(A=a, B=b)$. Note that this is not the same thing as what we said before with *conditional* probability because we are talking about *joint* probability here.
+
+The main problem here actually seems to be confusing *joint* and *conditional* probabilities. Still, generally, the more specific you are, the less probable it is. We will see later that this is important for designing experiments and analyzing data.
+
+### Gambler's Fallacy and Hot-Streak Fallacy
+
+A common fallacy is that there is some sort of overarching or underlying power or force that keeps probabilities in balance. The most common way that this fallacy shows itself is as the [Gambler's Fallacy](https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy). In the Gambler's Fallacy, the person incorrectly believes that because a rare event has not happened, it's time must come or it must happen in order to balance the probabilities in some way. For example, if "red 13" has not come up in Roulette for a while, then this "must" happen any time now.
+
+The Hot-Streak Fallacy is similar in that it assumes that some extraordinary event must continue to happen. However, some research has shown that in certain cases, this is not necessarily true ["Hot Hand" is not an illusion](https://www.gsb.stanford.edu/insights/jeffrey-zwiebel-why-hot-hand-may-be-real-after-all).
+
+This is a very easy mistake to make so Data Scientists and consumers of Data Science must be especially wary of this particular fallacy.
+
+### Inverse Probability Fallacy
+
+The Inverse Probability Fallacy relates to conditional probabilities, specifically by believing that the following are the same:
+
+$P(A|B) = P(B|A)$
+
+A concrete example of this fallacy would involve making the following claim:
+
+$P(rain|prediction) = P(prediction|rain)$
+
+Here we are saying that the probability of rain *given* that rain was predicted is equal to the probability of a prediction for rain *given* that it is raining. These are two entirely different things. Remember that probability is just counting and normalization.
+
+In the first case, we count all the times where it rained given a prediction of rain. In the second case, we count all the times rain was predicted given that it rained. You can think of a table like so:
+
+| actual | prediction |
+|------- |------------|
+|  yes   | no         |
+|  yes   | yes        |
+|  no    | yes        |
+| yes    | no         |
+
+In the first case, we add up all the times where actual is yes and prediction is yes but divide by the times that prediction is yes (regardless of actual). In the second case, we add up all the times where actual is yes and prediction is yes but divide by the times that actual is yes (regardless of prediction).
+
+These will not necessarily lead to the same number.
+
+### Base Rate Fallacy
+
+Suppose we're asked what religion we think Garth is and, knowing that he's from middle America, we can guess that he's notionally a Christian. Suppose we further learn that Garth is a goth and wears dark clothing with various mystical symbols on it, our estimation of Garth's religion would probably swing in the direction of being a Satanist.
+
+However, the base rate (prior) of being a Satanist is really quite low. There are 2,000,000,000 Christians in the world and only 100,000s of Satanists. While the probability of Garth being a Christian might go down, knowing that Garth is a goth shouldn't really flip our sense of the probability from most likely a Christian to most likely a Satanist. Doing this is called the [Base Rate Fallacy](https://en.wikipedia.org/wiki/Base_rate_fallacy).
+
+This is also related to Bayes Rule which tells us exactly how much we should change our prior when reviewing evidence. The difference between the posterior and prior is the *incremental evidence* whereas the posterior alone is the *total evidence*. The Base Rate fallacy can also be attributed to confusing incremental evidence and total evidence when the base rate is low. Upon learning that Garth dresses in black, wears eyeliner and black fingernail polish, we adjust our beliefs about his religion. But to conclude that he's a Satanist, ignoring the base rate, is to improperly change our beliefs based on the evidence alone.
+
+### Prosecutor's Fallacy
+
+This fallacy refers to a Prosecutor (and sometimes Defense Attorneys) arguing the wrong thing. This can result in a mistrial. As it turns out this rarely happens among the attorneys but can happen to expert testimony. This is really a family of fallacies the first of which relates to Bayes Rule and is related to the Inverse Probability Fallacy:
+
+$P(innocence|evidence) = \frac{P(evidence|innocence)P(innocence)}{P(evidence)}$
+
+The [Fallacy](https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy) is committed when the prosecutor assumes that just because the damning evidence is small $P(evidence|innocence)$ ("if he were innocent, the evidence would be really unlikely") that $P(innocence|evidence)$ must be equally as small. This happens a lot with forensic evidence, especially DNA evidence. But it simply isn't true that if $P(evidence|innocence) = 1:1,000,000$ that $P(innocence|evidence) = 1:1,000,000$.
+
+Another version of the Fallacy confuses the prior and conditional probabilities, that is, it assumes that $P(A)=P(A|B)$ and is thus related to the Base Rate Fallacy.
+

@@ -1,0 +1,137 @@
+---
+title: An R Markdown document converted from "source/probability/rules.ipynb"
+output: html_document
+---
+
+## Rules of Probability
+
+There are some handy rules that follow from the axioms of probability. In a probability course, you might be required to prove them. We will present them without proof.
+
+### Monotonicity
+
+$A \subseteq B \Rightarrow P(A) \leq P(B)$
+
+This says that if A is a subset of B then the probablity of A must not exceed the probability of B. This is really an abuse of notation. What we really mean is:
+
+$A \subseteq B \Rightarrow \sum_i P(a_i) \leq \sum_j P(b_j)$
+
+### Negation
+
+$P(\neg{a}) = 1 - P(a)$
+
+This follows from axiom #2. If we write out the summation and isolate the single event $a$ and then re-arrange terms, we get the above rule.
+
+### Total Probability
+
+This is also called the Law of Total Probability. It has the form:
+
+$P(A) = \sum_i P(A|B=b_i) P(B=b_i)$
+
+Remember that P(A) is a set of probabilities (one for each element in A). This rules makes a bit more sense if you break it out:
+
+$P(A=a_1) = P(A=a_1|B=b_1) P(B=b_1) + P(A=a_1|B=b_2) P(B=b_2) + \ldots + P(A=a_1|B=b_n) P(B=b_n)$
+
+We can derive the Law by looking at the definition of conditional probability for a single event:
+
+$P(A=a_1|B=b_1) = \frac{P(A=a_1, B=b_1)}{P(B=b_1)}$
+
+and re-arranging terms:
+
+$P(A=a_1, B=b_1) = P(A=a_1|B=b_1)P(B=b_1)$
+
+From our discussion about marginalization and Axiom #2, we know that:
+
+$P(A=a_1) = P(A=a_1, B=b_1) + P(A=a_1, B=b_2) + \ldots + P(A=a_1, B=b_n)$
+
+By substitution, we have:
+
+$P(A=a_1) = P(A=a_1|B=b_1) P(B=b_1) + P(A=a_1|B=b_2) P(B=b_2) + \ldots + P(A=a_1|B=b_n) P(B=b_n)$
+
+and for the entire set A, we have:
+
+$P(A) = SUM_i P(A|B=b_i) P(B=b_i)$
+
+Total Probability is very useful (believe it or not) because there are many situations where you don't know P(A) but you know P(A|B) and P(B). We will see this later.
+
+### Chain Rule
+
+Again, starting with the definition of conditional probability we have:
+
+$P(A|B) = \frac{P(A, B)}{P(B)}$
+
+and by re-arranging we have:
+
+$P(A, B) = P(A|B)P(B)$
+
+We can expand this to more sets:
+
+$P(A,B,C) = P(A|B,C) P(B|C) P(C)$
+
+$P(A,B,C,D) = P(A|B,C,D) P(B|C,D) P(C|D) P(D)$
+
+We can expand in any order:
+
+$P(A,B,C,D) = P(D|A,B,C) P(B|A,C) P(A|C) P(C)$
+
+But this is really just a clever manipulation of the definition of conditional probability:
+
+$P(A,B,C,D) = P(D|A,B,C) P(B|A,C) P(A|C) P(C)$
+$P(A,B,C,D) = \frac{P(D,A,B,C)}{P(B,A,C)} \frac{P(B,A,C)}{P(A, C)}\frac{P(A, C)}{P(C)} P(C)$
+
+Still, it can be a handy thing to know and it presents the foundation for Bayesian Networks.
+
+### Bayes Rule
+
+Bayes Rule is a similar manipulation of conditional probability. We start with the definition of conditional probability:
+
+$P(A|B) = \frac{P(A,B)}{P(B)}$
+
+and re-arrange:
+
+$P(A,B) = P(A|B)P(B)$
+
+We can start with the "opposite" conditional probability:
+
+$P(B|A) = \frac{P(A,B)}{P(A)}$
+
+and re-arrange:
+
+$P(A,B) = P(B|A)P(A)$
+
+which means I can set these two equal to each other:
+
+$P(B|A)P(A) = P(A|B)P(B)$
+
+and re-arrange:
+
+$P(B|A) = \frac{P(A|B)P(B)}{P(A)}$
+
+which does not look particularly interesting until I start giving my sets interesting names: B=Hypothesis and A=Data:
+
+$P(H|D) = \frac{P(D|H)P(H)}{P(D)}$
+
+which says...the probability of the hypothesis (or model or parameter) *given* the data is equal to the probability of the data *given* the hypothesis times the probability of the hypothesis. This is the normalized by the probability of the data.
+
+These probabilities all have names:
+
+* P(H|D) = posterior probability
+* P(D|H) = likelihood
+* P(H)   = prior probability
+* P(D)	 = normalizer
+
+Note that we almost never know P(D) and we will often use total probability to calculate it:
+
+$P(D) = \sum_h P(D|H=h)P(H=h)$
+
+Remember what our notation means. By solving for $P(H|D)$ we are solving for all the hypotheses and all the data outcomes at once. This means the posterior distribution described by $P(H|D)$ is not a single probability distribution but many. For a *single* hypothesis, we would have something like:
+
+$P(h1|D) = \frac{P(D|h1)P(h1)}{P(D)}$
+
+Note that the denominator does entail all hypotheses. We often end up having to use the rule of Total Probability here:
+
+$P(h1|D) = \frac{P(D|h1)P(h1)}{P(D|h1)P(h1) + P(D|h2)P(h2) + \dots + P(D|h_n)P(h_n)}$
+
+Bayes Rule is particularly important to data science because it says exactly how we should change our degree of certainty given new evidence. It also plays a foundational role in several machine learning techniques (Naive Bayes Classifier, Bayesian Belief Networks). It is also the main formula for Bayesian *inference*.
+
+We will spend an entire later chapter on Bayes Rule because of its central role in inference.
+

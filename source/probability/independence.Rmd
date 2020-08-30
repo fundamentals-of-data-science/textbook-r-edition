@@ -1,0 +1,45 @@
+---
+title: An R Markdown document converted from "source/probability/independence.ipynb"
+output: html_document
+---
+
+## Independence and Conditional Independence
+
+From before, we manipulated the definition of conditional probability as follows:
+
+$P(A|B) = \frac{P(A,B)}{P(B)}$
+
+and re-arrange:
+
+$P(A,B) = P(A|B)P(B)$
+
+Remember our interpretation of conditional probability: knowing what event in B happened gives us additional information that influences our expectations about which event in A will happen. If it doesn't, then:
+	
+$P(A, B) = P(A)P(B)$
+
+in which case A and B are said to be independent. This is known as the Multiplication Rule of Probability.
+
+In the previous section on Probability Rules, we introduced the Chain Rule. The Chain Rule basically gives us permission to factor a joint probability distribution however we please. For example, we might have:
+
+$P(A, B, C) = P(A|B, C)P(B|C)P(C)$
+
+we can also do the same with a conditional *joint* probability:
+
+$P(A,B| C) = P(A|B, C)P(B|C)$
+
+This says we can factor our uncertainty in the joint events of A and B given some known event in C into two parts: the uncertainty over an event in A given events in B and C are known times the uncertainty in an event in B given the event in C is known.
+
+For a concrete example, consider a joint probability of Religion, Party and Wealth. That's $P(A, B, C)$ or $P(Party, Wealth, Religion)$. Now suppose we condition on $Religion$ so we have $P(Party, Wealth | Religion)$. We're now describing our uncertainty over someone's Party and Wealth given we know their Religion. What the above says is that we can factor that into two parts. The first part is the probability of Party given we know their Wealth and Religion and the second part is the probability of Wealth given we know their Religion.
+
+Returning to the example, however, if the following is true:
+	
+$P(A,B|C) = P(A|C)P(B|C)$
+
+then we can say that A and B are conditionally independent given C. Note that the above can be true and that the following is also true:
+
+$P(A, B) \neq P(A)P(B)$
+
+The one does not imply the other.
+
+There are many applications in statistics and machine learning that either require or assume independence or conditional independence.
+
