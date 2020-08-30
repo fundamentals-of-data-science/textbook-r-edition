@@ -1,35 +1,39 @@
-# Probability
+# Probability {#probability}
 
-In this chapter we will discuss the probability as a framework for working with uncertainty.  We’ll start by definingprobability then move to theaxiomsof probability. We’ll talk about differenttypesof probability that cover scenariosfor complex events when some characteristics of the outcome are known.  We’ll then move on torulesof probabilitythat permit us to manipulate probabilities.
+In this chapter we will discuss the probability as a framework for working with uncertainty. We'll start by defining probability then move to the *axioms* of probability. We'll talk about different *types* of probability that cover scenarios for complex events when some characteristics of the outcome are known. We'll then move on to *rules* of probability that permit us to manipulate probabilities.
 
-Probability is used to talk about the plausibility of events. Sometimes the co-occurrence of events gives us additionalinformation (if someone one is wealthy, they may also wear designer labels). However, sometimes the co-occurrencegives us no additional information. We will talk aboutindependenceandconditional independence.
+Probability is used to talk about the plausibility of events. Sometimes the co-occurrence of events gives us additional information (if someone one is wealthy, they may also wear designer labels). However, sometimes the co-occurrence gives us no additional information. We will talk about *independence* and *conditional independence*.
 
-Probability is tricky and associated with a number offallacies, which we will discuss. This forms a subset of fallaciesassociated with data analysis in general which we will cover in a later chapter. Finally, we’ll go over some applicationsof probability and the role ofsimulationin solving problems involving probability.
+Probability is tricky and associated with a number of *fallacies*, which we will discuss. This forms a subset of fallacies associated with data analysis in general which we will cover in a later chapter. Finally, we'll go over some applications of probability and the role of *simulation* in solving problems involving probability.
 
-## From Systems Thinking to Probability
 
-## Definition of Probability
+```{r child='source/probability/systems.Rmd', echo=FALSE}
+```
 
-## Axioms of Probabilty
+```{r child='source/probability/definition.Rmd', echo=FALSE}
+```
 
-### Notation
+```{r child='source/probability/axioms.Rmd', echo=FALSE}
+```
 
-## Types of Probability
+```{r child='source/probability/types.Rmd', echo=FALSE}
+```
 
-### Joint Probability
+```{r child='source/probability/rules.Rmd', echo=FALSE}
+```
 
-### Conditional Probability
+```{r child='source/probability/independence.Rmd', echo=FALSE}
+```
 
-### Marginal or Prior Probability
+```{r child='source/probability/fallacies.Rmd', echo=FALSE}
+```
 
-## Rules of Probability
+```{r child='source/probability/applications.Rmd', echo=FALSE}
+```
 
-## Independence and Conditional Independence
+```{r child='source/probability/cities.Rmd', echo=FALSE}
+```
 
-## Probablistic Fallacies
+```{r child='source/probability/conclusion.Rmd', echo=FALSE}
+```
 
-## Applications
-
-## Probability and Simulation
-
-## Conclusion
