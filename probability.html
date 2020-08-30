@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Probability | Fundamentals of Data Science (R Edition)</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Probability | Fundamentals of Data Science (R Edition)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Probability | Fundamentals of Data Science (R Edition)" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Andrew Stewart" />
+<meta name="author" content="Stephyn Butcher" />
+
+
+<meta name="date" content="2020-08-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="systems.html"/>
+<link rel="next" href="final-words.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#business-statistics"><i class="fa fa-check"></i><b>1.1</b> Business Statistics</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#defining-data-science"><i class="fa fa-check"></i><b>1.2</b> Defining Data Science</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#venn-diagram-of-data-science"><i class="fa fa-check"></i><b>1.2.1</b> Venn Diagram of Data Science</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#data-science-is-science"><i class="fa fa-check"></i><b>1.3</b> Data Science is Science</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#big-data"><i class="fa fa-check"></i><b>1.4</b> Big Data</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#data-science-case-studies"><i class="fa fa-check"></i><b>1.5</b> Data Science Case Studies</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#signet-bank"><i class="fa fa-check"></i><b>1.5.1</b> Signet Bank</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#target"><i class="fa fa-check"></i><b>1.5.2</b> Target</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#walmart"><i class="fa fa-check"></i><b>1.5.3</b> Walmart</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction.html"><a href="introduction.html#obama-campaign"><i class="fa fa-check"></i><b>1.5.4</b> Obama Campaign</a></li>
+<li class="chapter" data-level="1.5.5" data-path="introduction.html"><a href="introduction.html#identifying-place"><i class="fa fa-check"></i><b>1.5.5</b> Identifying Place</a></li>
+<li class="chapter" data-level="1.5.6" data-path="introduction.html"><a href="introduction.html#pruning-trees-in-nyc"><i class="fa fa-check"></i><b>1.5.6</b> Pruning Trees in NYC</a></li>
+<li class="chapter" data-level="1.5.7" data-path="introduction.html"><a href="introduction.html#the-information-architecture-of-medicine-is-broken"><i class="fa fa-check"></i><b>1.5.7</b> The Information Architecture of Medicine is Broken</a></li>
+<li class="chapter" data-level="1.5.8" data-path="introduction.html"><a href="introduction.html#love-in-the-time-of-data"><i class="fa fa-check"></i><b>1.5.8</b> Love in the Time of Data</a></li>
+<li class="chapter" data-level="1.5.9" data-path="introduction.html"><a href="introduction.html#boozallenhamilton-data-science"><i class="fa fa-check"></i><b>1.5.9</b> Booz/Allen/Hamilton Data Science</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.6</b> Conclusion</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>1.7</b> Review</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="process.html"><a href="process.html"><i class="fa fa-check"></i><b>2</b> Data Science Process</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="process.html"><a href="process.html#the-process"><i class="fa fa-check"></i><b>2.1</b> The Process</a></li>
+<li class="chapter" data-level="2.2" data-path="process.html"><a href="process.html#side-note-on-data"><i class="fa fa-check"></i><b>2.2</b> Side Note on Data</a></li>
+<li class="chapter" data-level="2.3" data-path="process.html"><a href="process.html#stages-of-data-science"><i class="fa fa-check"></i><b>2.3</b> Stages of Data Science</a></li>
+<li class="chapter" data-level="2.4" data-path="process.html"><a href="process.html#agile-data-science-pyramid"><i class="fa fa-check"></i><b>2.4</b> Agile Data Science Pyramid</a></li>
+<li class="chapter" data-level="2.5" data-path="process.html"><a href="process.html#ask"><i class="fa fa-check"></i><b>2.5</b> ASK</a></li>
+<li class="chapter" data-level="2.6" data-path="process.html"><a href="process.html#convo"><i class="fa fa-check"></i><b>2.6</b> CoNVO</a></li>
+<li class="chapter" data-level="2.7" data-path="process.html"><a href="process.html#convo-examples"><i class="fa fa-check"></i><b>2.7</b> CoNVO Examples</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="process.html"><a href="process.html#refugee-non-profit"><i class="fa fa-check"></i><b>2.7.1</b> Refugee Non-Profit</a></li>
+<li class="chapter" data-level="2.7.2" data-path="process.html"><a href="process.html#marketing-department"><i class="fa fa-check"></i><b>2.7.2</b> Marketing Department</a></li>
+<li class="chapter" data-level="2.7.3" data-path="process.html"><a href="process.html#media-organization"><i class="fa fa-check"></i><b>2.7.3</b> Media Organization</a></li>
+<li class="chapter" data-level="2.7.4" data-path="process.html"><a href="process.html#advocacy-group"><i class="fa fa-check"></i><b>2.7.4</b> Advocacy Group</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="process.html"><a href="process.html#resistance"><i class="fa fa-check"></i><b>2.8</b> Resistance</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>2.9</b> Conclusion</a></li>
+<li class="chapter" data-level="2.10" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>2.10</b> Review</a></li>
+<li class="chapter" data-level="2.11" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
+<li class="chapter" data-level="2.12" data-path="process.html"><a href="process.html#additional-resources"><i class="fa fa-check"></i><b>2.12</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="systems.html"><a href="systems.html"><i class="fa fa-check"></i><b>3</b> Systems Theory</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="systems.html"><a href="systems.html#system-dynamics"><i class="fa fa-check"></i><b>3.1</b> System Dynamics</a></li>
+<li class="chapter" data-level="3.2" data-path="systems.html"><a href="systems.html#what-is-a-system"><i class="fa fa-check"></i><b>3.2</b> What is a System?</a></li>
+<li class="chapter" data-level="3.3" data-path="systems.html"><a href="systems.html#causal-loop-diagram"><i class="fa fa-check"></i><b>3.3</b> Causal Loop Diagram</a></li>
+<li class="chapter" data-level="3.4" data-path="systems.html"><a href="systems.html#heroin-model"><i class="fa fa-check"></i><b>3.4</b> Heroin Model</a></li>
+<li class="chapter" data-level="3.5" data-path="systems.html"><a href="systems.html#email-model"><i class="fa fa-check"></i><b>3.5</b> Email Model</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
+<li class="chapter" data-level="3.7" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>3.7</b> Review</a></li>
+<li class="chapter" data-level="3.8" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
+<li class="chapter" data-level="3.9" data-path="process.html"><a href="process.html#additional-resources"><i class="fa fa-check"></i><b>3.9</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#from-systems-thinking-to-probability"><i class="fa fa-check"></i><b>4.1</b> From Systems Thinking to Probability</a></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#definition-of-probability"><i class="fa fa-check"></i><b>4.2</b> Definition of Probability</a></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#axioms-of-probability"><i class="fa fa-check"></i><b>4.3</b> Axioms of Probability</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="probability.html"><a href="probability.html#notation"><i class="fa fa-check"></i><b>4.3.1</b> Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#types-of-probability"><i class="fa fa-check"></i><b>4.4</b> Types of Probability</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#joint-probability"><i class="fa fa-check"></i><b>4.4.1</b> Joint Probability</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.4.2</b> Conditional Probability</a></li>
+<li class="chapter" data-level="4.4.3" data-path="probability.html"><a href="probability.html#marginal-or-prior-probability"><i class="fa fa-check"></i><b>4.4.3</b> Marginal or Prior Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#rules-of-probability"><i class="fa fa-check"></i><b>4.5</b> Rules of Probability</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#monotonicity"><i class="fa fa-check"></i><b>4.5.1</b> Monotonicity</a></li>
+<li class="chapter" data-level="4.5.2" data-path="probability.html"><a href="probability.html#negation"><i class="fa fa-check"></i><b>4.5.2</b> Negation</a></li>
+<li class="chapter" data-level="4.5.3" data-path="probability.html"><a href="probability.html#total-probability"><i class="fa fa-check"></i><b>4.5.3</b> Total Probability</a></li>
+<li class="chapter" data-level="4.5.4" data-path="probability.html"><a href="probability.html#chain-rule"><i class="fa fa-check"></i><b>4.5.4</b> Chain Rule</a></li>
+<li class="chapter" data-level="4.5.5" data-path="probability.html"><a href="probability.html#bayes-rule"><i class="fa fa-check"></i><b>4.5.5</b> Bayes Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#independence-and-conditional-independence"><i class="fa fa-check"></i><b>4.6</b> Independence and Conditional Independence</a></li>
+<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#probabilistic-fallacies"><i class="fa fa-check"></i><b>4.7</b> Probabilistic Fallacies</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#conjunction-fallacy"><i class="fa fa-check"></i><b>4.7.1</b> Conjunction Fallacy</a></li>
+<li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#gamblers-fallacy-and-hot-streak-fallacy"><i class="fa fa-check"></i><b>4.7.2</b> Gambler’s Fallacy and Hot-Streak Fallacy</a></li>
+<li class="chapter" data-level="4.7.3" data-path="probability.html"><a href="probability.html#inverse-probability-fallacy"><i class="fa fa-check"></i><b>4.7.3</b> Inverse Probability Fallacy</a></li>
+<li class="chapter" data-level="4.7.4" data-path="probability.html"><a href="probability.html#base-rate-fallacy"><i class="fa fa-check"></i><b>4.7.4</b> Base Rate Fallacy</a></li>
+<li class="chapter" data-level="4.7.5" data-path="probability.html"><a href="probability.html#prosecutors-fallacy"><i class="fa fa-check"></i><b>4.7.5</b> Prosecutor’s Fallacy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="probability.html"><a href="probability.html#applications"><i class="fa fa-check"></i><b>4.8</b> Applications</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="probability.html"><a href="probability.html#applications-in-general-probability"><i class="fa fa-check"></i><b>4.8.1</b> Applications in General Probability</a></li>
+<li class="chapter" data-level="4.8.2" data-path="probability.html"><a href="probability.html#applications-of-bayes-rule"><i class="fa fa-check"></i><b>4.8.2</b> Applications of Bayes Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="probability.html"><a href="probability.html#probability-and-simulation"><i class="fa fa-check"></i><b>4.9</b> Probability and Simulation</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="probability.html"><a href="probability.html#cities"><i class="fa fa-check"></i><b>4.9.1</b> Cities</a></li>
+<li class="chapter" data-level="4.9.2" data-path="probability.html"><a href="probability.html#what-do-we-know"><i class="fa fa-check"></i><b>4.9.2</b> What do we know?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>4.10</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentals of Data Science (R Edition)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="probability" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Probability</h1>
+<p>In this chapter we will discuss the probability as a framework for working with uncertainty. We’ll start by defining probability then move to the <em>axioms</em> of probability. We’ll talk about different <em>types</em> of probability that cover scenarios for complex events when some characteristics of the outcome are known. We’ll then move on to <em>rules</em> of probability that permit us to manipulate probabilities.</p>
+<p>Probability is used to talk about the plausibility of events. Sometimes the co-occurrence of events gives us additional information (if someone one is wealthy, they may also wear designer labels). However, sometimes the co-occurrence gives us no additional information. We will talk about <em>independence</em> and <em>conditional independence</em>.</p>
+<p>Probability is tricky and associated with a number of <em>fallacies</em>, which we will discuss. This forms a subset of fallacies associated with data analysis in general which we will cover in a later chapter. Finally, we’ll go over some applications of probability and the role of <em>simulation</em> in solving problems involving probability.</p>
+<div id="from-systems-thinking-to-probability" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> From Systems Thinking to Probability</h2>
+<p>It may not be intuitive but the use of probability as a tool to model plausibility arises naturally out of systems thinking. To explain how, we consider the canonical example of probability: flipping a coin.</p>
+<p>If we think about a Coin Flipping System, what are the elements of this “flipping a coin” system? Obviously, the coin has something to do with it, maybe its shape, size, weight, balance, etc. Coins will behave differently on the Earth than on the Moon or elsewhere in the universe so the gravity, atmosphere, etc. all play a role. There’s the size and shape of the hand, location of the coin, and the force applied. Finally, there’s this universe’s general laws of physics. So “flipping a coin” is a system and, more specifically, it is a deterministic system.</p>
+<p>But it turns out that we cannot actually measure most of the variables that influence the outcome (whether the coin is heads or tails) and because of this, even though there is no actual variable called “chance”, it’s easier to model the variable “coin flip” as being <em>random</em>. The key point, though, is that it is not “arbitrary”. We’re using probability to model the system of flipping a coin because it’s a great way of working with <em>uncertainty</em> (the opposite of plausibility, we’ll use both terms).</p>
+<p>It is perhaps unfortunate that the theory of probability was developed around gambling because the whole idea of “games of chance” biases our views about what probability is and what it can be used for. The concept of “probability” thus becomes associated with some fuzzy ideas about “chance”, “randomness” and “arbitrariness”. Throughout this text, we just take probability to mean a measure of plausibility or uncertainty…and usually that uncertainty comes from ignorance. <em>Not</em> from some inherent, mysterious “randomness” in the process.</p>
+<p>On the other hand, we do have everyday notions and ideas about probability. We often say that things are “probable” or “likely” and we’ll talk about the “probability” of something happening or the “likelihood” of something happening. These actually fit very well with our idea of probability as measuring uncertainty. However, we need to bear in mind that although we will often use the colloquial “likelihood” now and again, “likelihood”, as we will see, has a technical meaning as well. In general, this should not be a problem as the context will tell us which meaning of likelihood is being used. It’s just something we need to be aware of.</p>
+<p>Long story short, when we flip a coin, and we don’t know about or we simply ignore all of those factors we cannot measure, we need a way of working with the resulting uncertainty over the outcomes. Probability allows us to do that.</p>
+<p>As a side note, if you don’t believe there isn’t at least one deterministic coin flipping system, researchers have built a <a href="https://www.npr.org/templates/story/story.php?storyId=1697475">coin flipping machine</a> that can reliably make a coin always come up heads.</p>
+</div>
+<div id="definition-of-probability" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Definition of Probability</h2>
+<p>Data is ultimately evidence for a claim. In Data Science, we want to use data to establish claims that answer a question or solve a problem. The <em>degree</em> to which data is supports a claim could be called the claim’s <em>plausibilty</em>. As we gather data, some claims will be more plausible than others.</p>
+<p>Our tool for dealing with plausibility is <em>probability</em>. Following <a href="https://en.wikipedia.org/wiki/Edwin_Thompson_Jaynes">Edwin Jaynes</a>, we see probability as an extension of logic from claims that are true or false to claims that have different degrees of support.</p>
+<p>Consider the following syllogism in logic:</p>
+<ol style="list-style-type: decimal">
+<li>If something is a person, it is mortal.</li>
+<li>Socrates is a person.</li>
+<li>Socrates is mortal.</li>
+</ol>
+<p>This is an example of <em>modus ponens</em>. Now consider the following syllogism:</p>
+<ol style="list-style-type: decimal">
+<li>If something is a swan, it is white.</li>
+<li>This animal is a swan.</li>
+<li>This animal is white.</li>
+</ol>
+<p>Of course, when this syllogism was framed, Australia had not yet been discovered by Europeans. However, when the Europeans arrived, they found black swans. The syllogism is now false because the first statement is false. In logic, veracity is an all or nothing quality. Statements are true or false.</p>
+<p>While there are various methods of handling degrees of truth, we will focus in this text on probability. Probability permits us to work with statements like the following:</p>
+<ol style="list-style-type: decimal">
+<li>If something is a swan, it is likely to be white.</li>
+<li>This animal is a swan.</li>
+<li>It is likely to be white.</li>
+</ol>
+<p>Probability enables us to work in a world where the evidence is not clear cut and only lends partial support–plausibility–to a claim. The evidence might also support multiple claims to varying degrees preventing us from being absolutely certain in our decisions.</p>
+<p>In this chapter we will discuss the basics of probability. In the next chapter, we will combine probability and systems thinking to talk about <em>stochastic processes</em>. In a later chapter, we will return to probability and talk about the continuous version of <em>modus ponens</em>, Bayes Rule and statistical inference.</p>
+</div>
+<div id="axioms-of-probability" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Axioms of Probability</h2>
+<p>There are different versions of the “axioms of probability” but we’ll use the <strong>Kolgomorov Axioms of Probability</strong> because they’re straightforward. They define the basic properties of a <strong>probability metric</strong>.</p>
+<p>Probability is defined over outcomes (we’ll talk about events later). Outcomes are, more or less, mutually exclusive observations about a fixed domain, which can generally include the <em>properties</em> of objects. We’ve already discussed the coin flip, <code>W = {"heads", "tails"}</code>. If we were talking about customers, we might have an outcome space of <code>W = {"purchase", "not purchase"}</code>. If a customer purchases something, we can talk about an outcome space of where they live, <code>S = {"AL", "AK", "AR", ..., "WY"}</code> and their gender, <code>W = {"male", "female"}</code> (very few businesses account for non-binary identification). The customer’s state of residence and gender are properties of the person. Finally, we can talk about joint outcome spaces as the Cartesian product of simple outcome spaces, <code>S x G = {("AL", "male"), ("AL", "female"), ("AK", "male"), ("AK", "female"),...}</code>.</p>
+<p>We will define different types of probability later but for now we take <code>P(W)</code> to mean “the probability of”. The argument to <code>P(W)</code>, <code>W</code>, is an outcome space, such as state or gender. <code>P(W)</code> can be thought of as a assignment of probability to each element of <code>W</code> (as a table of probability values or perhaps a function). <code>P(W="male")</code> returns the probability of the single outcome in W, <code>W="male"</code>. Following the conventional notation, when confusion is unlikely, we can also write <code>P(male)</code> to mean the same as <code>P(W="male")</code>.</p>
+<p>If we let <span class="math inline">\(W\)</span> be the set of all possible outcomes and <span class="math inline">\(w\)</span> be some particular outcome (which are considered to be <em>atomic</em> or mutually exclusive) then the axioms of probability are:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(w) \geq 0\)</span></li>
+<li><span class="math inline">\(P(W) = \sum_i P(w_i) = 1\)</span></li>
+<li><span class="math inline">\(P(w_i \cup w_j) = P(w_i) + P(w_j)\)</span></li>
+</ol>
+<p>The first axiom states that a probability, a degree of certainty, must be non-negative. While one can certainly think of an interpretation of a negative probability (perhaps our certainty against an event happening), it is cleaner to think of all probabilities as being non-negative.</p>
+<p>The second axiom says that we must be 100% certain in all the outcomes in <span class="math inline">\(W\)</span> taken together. At minimum, one of them must happen. It also constrains probabilities to be on the range <span class="math inline">\((0, 1)\)</span>. We can always convert an “improper” probability distribution into a proper probability distribution by <em>normalizing</em>: dividing all “improper” probabilities through by the sum total.</p>
+<p>In fact, we may often do this on purpose when eliciting probabilities from people. If we assign a certainty value of 1 to an outcome A, we can ask someone if they feel that outcome B is twice as likely to happen (in which case it would get a value of 2), or half as likely to happen (in which case it would get a 1/2). We can then go through and normalize.</p>
+<p>The third axiom says that the probability of <span class="math inline">\(w_i\)</span> <em>or</em> <span class="math inline">\(w_j\)</span> is equal to the sums of the their individual probabilities, <span class="math inline">\(P(w_i)\)</span> or <span class="math inline">\(P(w_j)\)</span>. If plausibility in rain tomorrow is 0.23 and our degree of belief in snow tomorrow is 0.10 then our degree of belief–probability–in either rain or snow tomorrow must be 0.33. This axiom is known as the <strong>Additive Law of Probability</strong>. Note that this is only true because we’re talking about atomic outcomes.</p>
+<p>It is sometimes the case that the axioms are defined in terms of <strong>events</strong>. An event is a generalization of an outcome and may contain several outcomes. Rolling a 1 on a six-sided die is an outcome. Rolling an odd number on a six sided die is an event. Note that rolling a 1 on a six-sided die is <em>also</em> an event which can lead to some confusion.</p>
+<p>If we consider events, then the 3rd Axiom becomes:</p>
+<p>3a. <span class="math inline">\(P(E_i \cup E_j) = P(E_i) + P(E_j) - P(E_i \cap E_j)\)</span></p>
+<p>Why the difference? The first version of the axiom is defined for outcomes which must be mutually exclusive. The second version is defined for events which may not be mutually exclusive. Events can be collections of outcomes.</p>
+<p>For example, <span class="math inline">\(W\)</span> might be the sides of a six-sided die <span class="math inline">\(W = {1, 2, 3, 4, 5, 6}\)</span>. These are the possible <em>outcomes</em>. In contrast, <span class="math inline">\(E_1\)</span> might be “all even valued sides of the die” and <span class="math inline">\(E_2\)</span> might be “all sides whose value is &lt; 4” which are <em>events</em>. While the outcomes in <span class="math inline">\(W\)</span> are mutually exclusive, the <em>events</em> in <span class="math inline">\(E_1\)</span> and <span class="math inline">\(E_2\)</span> are not (they have the value 2 in common). If follows that all outcomes are events but not vice versa.</p>
+<p>The <strong>power set</strong> of a set <span class="math inline">\(X\)</span> is the set of sets generated by combining all possible elements of X into sets. For example, {1, 2, 3} has the power set [{1, 2, 3}, {1, 2}, {1, 3}, {2, 3}, {1}, {2}, {3}, {}]. You can think of events as coming from the power set over the set of all individual outcomes with only some of them being of any interest.</p>
+<p>If <span class="math inline">\(W\)</span> defines the set of outcomes, then the power set defines all possible events. Note that all outcomes are events but not all events are outcomes. So the power set of {All US States} will include {AK, HI}, {AR}, {ME, NM}, {CA, AZ, OR, WA, NV}. Some of these may be of interest to us and some may not and some of these sets have names such as “Continental US” or “Western States”. The upshot is that all outcomes are by definition mutually exclusive but events are not. When working with events, we must use the modified versions of Axioms #2 and #3.</p>
+<p>We will usually refer to events and need only worry about whether or not they’re atomic or mutually exclusive. This meshes nicely with the language of software engineering in general and logging specifically.</p>
+<div id="notation" class="section level3" number="4.3.1">
+<h3><span class="header-section-number">4.3.1</span> Notation</h3>
+<p>Probability notation can get a bit crazy. We’ve already mentioned that <span class="math inline">\(P()\)</span> can mean a lot of different things:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(A)\)</span> - is the probability <strong>distribution</strong> over the outcomes/events of A. It is most likely a table of events and probability values.</li>
+<li><span class="math inline">\(P(A=a_1)\)</span> - is the <strong>probability</strong> that A takes on the value a1. It’s a single probability value.</li>
+<li><span class="math inline">\(P(a_1)\)</span> - when the context is not ambiguous, this is a shorthand for the above. It is a single probability value.</li>
+</ol>
+<p>What if there’s more than one variable?</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(A, B)\)</span> - is the probability distribution over the <em>Cartesian product</em> of outcomes/events in A and B. If A = {a1, a2, a3} and B = {b1, b2} then <span class="math inline">\(P(A, B)\)</span> returns a single probability value for each of (a1, b1), (a1, b2), (a2, b1), (a2, b2), (a3, b1), (a3, b2).</li>
+<li><span class="math inline">\(P(A|B)\)</span> - is actually <em>multiple</em> probability distributions. The <span class="math inline">\(|B\)</span> part is read as “given B”. This is known as a <em>conditional probability</em> which we’ll talk about later. There is one probability distribution for each possible value of B. So if B = {b1, b2, b3, b4}, <span class="math inline">\(P(A|B)\)</span> is actually <em>four</em> probability distributions.</li>
+</ol>
+<p>Operations on probability distributions are kind of like joins in database queries:</p>
+<ol style="list-style-type: decimal">
+<li><span class="math inline">\(P(A)P(A)\)</span> - This is an outer join of A (cartesian product) with itself. <span class="math inline">\(P(a1)\)</span> * <span class="math inline">\(P(a1)\)</span>, <span class="math inline">\(P(a1)\)</span> * <span class="math inline">\(P(a2)\)</span>, <span class="math inline">\(P(a2)\)</span> * <span class="math inline">\(P(a1)\)</span>, <span class="math inline">\(P(a2)\)</span> * <span class="math inline">\(P(a2)\)</span>.</li>
+<li><span class="math inline">\(P(A)P(B)\)</span> - This is an outer join of A with B.</li>
+<li><span class="math inline">\(P(A|B)P(B)\)</span> - This an <em>inner</em> join. Remember that <span class="math inline">\(P(A|B)\)</span> is actually multiple probability distributions. This means that if B = {b1, b2} then we have <span class="math inline">\(P(A|B=b1)P(B=b1)\)</span>, <span class="math inline">\(P(A|B=b2)P(B=b2)\)</span>. In this case, B acts as the “foreign key” between the two sets.</li>
+</ol>
+<p>As you work through some examples later, you’ll get a better feel for how it all hangs together.</p>
+</div>
+</div>
+<div id="types-of-probability" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Types of Probability</h2>
+<p>When we have a complex event space, we may have different <em>types</em> of probability. These probability types cover <em>joint</em> probability, <em>conditional</em> probability, and <em>marginal</em> or <em>prior</em> probability.</p>
+<div id="joint-probability" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Joint Probability</h3>
+<p>Consider a social and economic process whereby certain areas are more or less densely populated, have more jobs or better jobs, or have different kinds of industries. We can think of these areas as having two properties, <strong>Community</strong> and <strong>Income</strong>.</p>
+<p>We may not have sufficient information to characterize this process (a system that changes over time) for a particular area and so we want to use probability to describe how plausible certain occurrences of these <em>joint</em> events are. The possible events for Community (C) are {urban, suburban, rural} and the possible events for Income are {low, high}. Taken together these define an event space that is the cross product of the two sets {(urban, low), (urban, high),…}.</p>
+<p>If this seems weird to you, it is! Normally we work the other way around. We work from data (events) about communities and <em>infer</em> these proportions. Inference is covered in a later chapter. I want you to get used to use probability for things other than card games.</p>
+<p>The following <strong>joint probability distribution</strong> over these two sets measures our belief that the next observed area will some combination of properties for Community and Income:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">area</th>
+<th align="center">low</th>
+<th align="center">high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">rural</td>
+<td align="center">0.04</td>
+<td align="center">0.02</td>
+</tr>
+<tr class="even">
+<td align="center">suburban</td>
+<td align="center">0.19</td>
+<td align="center">0.22</td>
+</tr>
+<tr class="odd">
+<td align="center">urban</td>
+<td align="center">0.29</td>
+<td align="center">0.24</td>
+</tr>
+</tbody>
+</table>
+<p>Each entry in the table is a particular probability estimate such as:</p>
+<p><span class="math inline">\(P(C=urban, I=high) = P(urban, high) = 0.24\)</span></p>
+<p><span class="math inline">\(P(C=rural, I=low) = P(rural, low) = 0.04\)</span></p>
+<p>If we want to know the probability of the event (urban, low) <strong>or</strong> (urban, high) then by axiom #3, we have:</p>
+<p><span class="math inline">\(P(urban, low \cup urban, high) = P(urban, low) + P(urban, high) = 0.29 + 0.24 = 0.53\)</span></p>
+<p>and similarly, if we want to know the probability of (urban, high) <strong>or</strong> (suburban, high) we can calculate it as:</p>
+<p><span class="math inline">\(P(urban, high \cup suburban, high) = P(urban, high) + P(suburban, high) = 0.24 + 0.22 = 0.46\)</span></p>
+<p>This seems a bit unnatural at first because it doesn’t, on the surface, appear to be the same as flipping a coin. But the fact that there are 6 numbers (5 of which are independent, the 6th is derivable from the axiom #2) instead of 1 doesn’t change anything.</p>
+<p>The main differences are:</p>
+<ol style="list-style-type: decimal">
+<li>The process involves the development of geographic areas (instead of the physical process of flipping a coin).</li>
+<li>There are two (joint) events being measured (instead of just the one, heads or tails).</li>
+</ol>
+<p>As it turns out, <em>calculating</em> these probabilities from data is one of the simplest forms of modeling. We will discuss this later.</p>
+<p>On a final note, there is no limit (except perhaps processing power, space, or credulity) to the number of variables you can have in a joint probability distribution. <span class="math inline">\(P(A, B)\)</span> is one. <span class="math inline">\(P(A, B, C)\)</span> is one. And <span class="math inline">\(P(A, B, C, D, E, F, G)\)</span> is one. Of course, as you add more variables, the size of the corresponding probability table increases exponentially.</p>
+</div>
+<div id="conditional-probability" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Conditional Probability</h3>
+<p><span class="math inline">\(P(C, I)\)</span> is a <strong>joint probability distribution</strong> over all the possible combinations of Community and Income. But what if we already know the Income? This is denoted by <span class="math inline">\(P(C | I)\)</span> and is called a <strong>conditional probability distribution</strong> because we “condition” our uncertainty on the information we have.</p>
+<p>When we look at a specific event, a <strong>joint</strong> probability might be something like <span class="math inline">\(P(urban, low)\)</span>. This is the probability of the next geographic area being both an urban community and low income <em>if</em> we don’t know either value. However, the <strong>conditional</strong> probability <span class="math inline">\(P(urban | low)\)</span> is the probability of the next geographic areas being both an urban community and low income if we already know that it’s low income. These two probabilities will not necessarily be the same (a point to which we will return later).</p>
+<p>Conditional probability effectively focuses our attention on a subset of the joint probability space where some of our uncertainty is resolved by knowing <em>some</em> of what happened. Remember that <em>joint</em> probability is the probability of any combination of events, assuming we know nothing. But if we know that <span class="math inline">\(income = low\)</span> then we do not need to look at <span class="math inline">\(income = high\)</span> anymore because it’s not possible. We know that that event is not going to happen and thus we can ignore it. This is true whether there are 2 possible events or 100 and whether we know the values for 1 or 99. Whenever we find out the value of a variable–that some event has happened–we can ignore all other values for that variable as no longer being possible.</p>
+<p>When we do this, however, we’re left with improper probability distributions. By the 2nd Axiom of Probability, all probability distributions must sum to 1 therefore we need to normalize the remaining probabilities (of event combinations that <em>can</em> happen). We do this by dividing through by the sum of the remaining possible events.</p>
+<p>More formally, the definition of conditional probability is:</p>
+<p><span class="math inline">\(P(A|B) = \frac{P(A, B)}{P(B)}\)</span></p>
+<p>and if you play with the math a bit, you will see that this is the same thing. Don’t be confused by the seeming division of a probability distribution by another probability distribution. This is just a shorthand for element-wise division. Therefore, using the joint probability table from above, we can calculate:</p>
+<p><span class="math inline">\(P(urban|low) = P(urban, low)/P(low) = 0.29/0.52 = 0.56\)</span></p>
+<p>Our conditional probability table, <span class="math inline">\(P(Community|Income)\)</span>, describes the uncertainty under any outcome for Income:</p>
+<p><strong>Conditional Probability</strong>, <span class="math inline">\(P(Community|Income)\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">area</th>
+<th align="center">low</th>
+<th align="center">high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">rural</td>
+<td align="center">0.08</td>
+<td align="center">0.05</td>
+</tr>
+<tr class="even">
+<td align="center">suburban</td>
+<td align="center">0.36</td>
+<td align="center">0.46</td>
+</tr>
+<tr class="odd">
+<td align="center">urban</td>
+<td align="center">0.56</td>
+<td align="center">0.50</td>
+</tr>
+</tbody>
+</table>
+<p>In this case, <span class="math inline">\(P(Community|Income)\)</span> has 2 probability distributions (one for each possible value of Income). In this case, each column sums to 1.</p>
+<p>We can do this for Community as well:</p>
+<p><strong>Conditional Probability</strong>, <span class="math inline">\(P(Income|Community)\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">area</th>
+<th align="center">low</th>
+<th align="center">high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">rural</td>
+<td align="center">0.65</td>
+<td align="center">0.35</td>
+</tr>
+<tr class="even">
+<td align="center">suburban</td>
+<td align="center">0.46</td>
+<td align="center">0.54</td>
+</tr>
+<tr class="odd">
+<td align="center">urban</td>
+<td align="center">0.54</td>
+<td align="center">0.46</td>
+</tr>
+</tbody>
+</table>
+<p>But this means that the table above actually has <em>three</em> separate probability distributions. One for each possible outcome of Community and each distribution itself (row in this case) adheres to Axiom #2 (they sum to 1).</p>
+<p>In general, with conditional probabilities, knowing that some event occurs often changes our information about the certainty or uncertainty of another event. However, in general, we <strong>cannot</strong> say anything about whether or not:</p>
+<p><span class="math display">\[P(A) &lt;=&gt; P(A | B)\]</span></p>
+<p>Conditional probabilities are perfectly general.</p>
+<p>Just as we can have a joint probability distribution over many different event spaces such as P(A, B, C, D, E, F) we can have a conditional probability distribution where the result or value for some (at least one) of the sets is known. For example, we might know the values of <span class="math inline">\(C\)</span> and <span class="math inline">\(D\)</span>:</p>
+<p><span class="math inline">\(P(A, B | C, D) = \frac{P(A, B, C, D)}{P(C, D)}\)</span></p>
+</div>
+<div id="marginal-or-prior-probability" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Marginal or Prior Probability</h3>
+<p>When dealing with a joint probability distribution over many sets, there may sometimes be sets that we don’t care about, that is, we’re only interested in the probabilities of some subset of joint event space. The simplest example is having a joint probability distribution <span class="math inline">\(P(A, B)\)</span> and only being interested in the probability distribution <span class="math inline">\(P(A)\)</span> or <span class="math inline">\(P(B)\)</span>. In this case, we can <em>marginalize</em> out the events we are not interested in. “Marginalization” comes from the actual practice of calculating marginal values/probabilities in the actual margins of books and ledgers.</p>
+<p>For example, if we have our joint probability distribution <span class="math inline">\(P(C, I)\)</span> and we only care about community, <span class="math inline">\(C\)</span>, we can marginalize out income:</p>
+<p><span class="math inline">\(P(urban, low \cup urban, high) = P(urban, low) + P(urban, high) = 0.29 + 0.24 = 0.53\)</span></p>
+<p><span class="math inline">\(P(suburban, low \cup suburban, high) = P(suburban, low) + P(suburban, high) = 0.19 + 0.22 = 0.41\)</span></p>
+<p><span class="math inline">\(P(rural, low \cup rural, high) = P(rural, low) + P(rural, high) = 0.04 + 0.02 = 0.06\)</span></p>
+<p>which leads to the following:</p>
+<p><strong>Marginal Probability</strong>, <span class="math inline">\(P(Community)\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">area</th>
+<th align="center">any</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">rural</td>
+<td align="center">0.06</td>
+</tr>
+<tr class="even">
+<td align="center">suburban</td>
+<td align="center">0.41</td>
+</tr>
+<tr class="odd">
+<td align="center">urban</td>
+<td align="center">0.53</td>
+</tr>
+</tbody>
+</table>
+<p>This follows from the axioms of probability. We can also do this for income:</p>
+<p><strong>Marginal Probability</strong>, <span class="math inline">\(P(Income)\)</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">area</th>
+<th align="center">low</th>
+<th align="center">high</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">any</td>
+<td align="center">0.52</td>
+<td align="center">0.48</td>
+</tr>
+</tbody>
+</table>
+<p>which strangely leads us back to coin flipping.</p>
+<p>According to Jaynes, you can think of P(heads) as a marginalization over everything we don’t know or don’t care about in a larger joint probability distribution such as P(heads, gravity, Earth, Jim, left handed, …).</p>
+</div>
+</div>
+<div id="rules-of-probability" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Rules of Probability</h2>
+<p>There are some handy rules that follow from the axioms of probability. In a probability course, you might be required to prove them. We will present them without proof.</p>
+<div id="monotonicity" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Monotonicity</h3>
+<p><span class="math inline">\(A \subseteq B \Rightarrow P(A) \leq P(B)\)</span></p>
+<p>This says that if A is a subset of B then the probablity of A must not exceed the probability of B. This is really an abuse of notation. What we really mean is:</p>
+<p><span class="math inline">\(A \subseteq B \Rightarrow \sum_i P(a_i) \leq \sum_j P(b_j)\)</span></p>
+</div>
+<div id="negation" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Negation</h3>
+<p><span class="math inline">\(P(\neg{a}) = 1 - P(a)\)</span></p>
+<p>This follows from axiom #2. If we write out the summation and isolate the single event <span class="math inline">\(a\)</span> and then re-arrange terms, we get the above rule.</p>
+</div>
+<div id="total-probability" class="section level3" number="4.5.3">
+<h3><span class="header-section-number">4.5.3</span> Total Probability</h3>
+<p>This is also called the Law of Total Probability. It has the form:</p>
+<p><span class="math inline">\(P(A) = \sum_i P(A|B=b_i) P(B=b_i)\)</span></p>
+<p>Remember that P(A) is a set of probabilities (one for each element in A). This rules makes a bit more sense if you break it out:</p>
+<p><span class="math inline">\(P(A=a_1) = P(A=a_1|B=b_1) P(B=b_1) + P(A=a_1|B=b_2) P(B=b_2) + \ldots + P(A=a_1|B=b_n) P(B=b_n)\)</span></p>
+<p>We can derive the Law by looking at the definition of conditional probability for a single event:</p>
+<p><span class="math inline">\(P(A=a_1|B=b_1) = \frac{P(A=a_1, B=b_1)}{P(B=b_1)}\)</span></p>
+<p>and re-arranging terms:</p>
+<p><span class="math inline">\(P(A=a_1, B=b_1) = P(A=a_1|B=b_1)P(B=b_1)\)</span></p>
+<p>From our discussion about marginalization and Axiom #2, we know that:</p>
+<p><span class="math inline">\(P(A=a_1) = P(A=a_1, B=b_1) + P(A=a_1, B=b_2) + \ldots + P(A=a_1, B=b_n)\)</span></p>
+<p>By substitution, we have:</p>
+<p><span class="math inline">\(P(A=a_1) = P(A=a_1|B=b_1) P(B=b_1) + P(A=a_1|B=b_2) P(B=b_2) + \ldots + P(A=a_1|B=b_n) P(B=b_n)\)</span></p>
+<p>and for the entire set A, we have:</p>
+<p><span class="math inline">\(P(A) = SUM_i P(A|B=b_i) P(B=b_i)\)</span></p>
+<p>Total Probability is very useful (believe it or not) because there are many situations where you don’t know P(A) but you know P(A|B) and P(B). We will see this later.</p>
+</div>
+<div id="chain-rule" class="section level3" number="4.5.4">
+<h3><span class="header-section-number">4.5.4</span> Chain Rule</h3>
+<p>Again, starting with the definition of conditional probability we have:</p>
+<p><span class="math inline">\(P(A|B) = \frac{P(A, B)}{P(B)}\)</span></p>
+<p>and by re-arranging we have:</p>
+<p><span class="math inline">\(P(A, B) = P(A|B)P(B)\)</span></p>
+<p>We can expand this to more sets:</p>
+<p><span class="math inline">\(P(A,B,C) = P(A|B,C) P(B|C) P(C)\)</span></p>
+<p><span class="math inline">\(P(A,B,C,D) = P(A|B,C,D) P(B|C,D) P(C|D) P(D)\)</span></p>
+<p>We can expand in any order:</p>
+<p><span class="math inline">\(P(A,B,C,D) = P(D|A,B,C) P(B|A,C) P(A|C) P(C)\)</span></p>
+<p>But this is really just a clever manipulation of the definition of conditional probability:</p>
+<p><span class="math inline">\(P(A,B,C,D) = P(D|A,B,C) P(B|A,C) P(A|C) P(C)\)</span>
+<span class="math inline">\(P(A,B,C,D) = \frac{P(D,A,B,C)}{P(B,A,C)} \frac{P(B,A,C)}{P(A, C)}\frac{P(A, C)}{P(C)} P(C)\)</span></p>
+<p>Still, it can be a handy thing to know and it presents the foundation for Bayesian Networks.</p>
+</div>
+<div id="bayes-rule" class="section level3" number="4.5.5">
+<h3><span class="header-section-number">4.5.5</span> Bayes Rule</h3>
+<p>Bayes Rule is a similar manipulation of conditional probability. We start with the definition of conditional probability:</p>
+<p><span class="math inline">\(P(A|B) = \frac{P(A,B)}{P(B)}\)</span></p>
+<p>and re-arrange:</p>
+<p><span class="math inline">\(P(A,B) = P(A|B)P(B)\)</span></p>
+<p>We can start with the “opposite” conditional probability:</p>
+<p><span class="math inline">\(P(B|A) = \frac{P(A,B)}{P(A)}\)</span></p>
+<p>and re-arrange:</p>
+<p><span class="math inline">\(P(A,B) = P(B|A)P(A)\)</span></p>
+<p>which means I can set these two equal to each other:</p>
+<p><span class="math inline">\(P(B|A)P(A) = P(A|B)P(B)\)</span></p>
+<p>and re-arrange:</p>
+<p><span class="math inline">\(P(B|A) = \frac{P(A|B)P(B)}{P(A)}\)</span></p>
+<p>which does not look particularly interesting until I start giving my sets interesting names: B=Hypothesis and A=Data:</p>
+<p><span class="math inline">\(P(H|D) = \frac{P(D|H)P(H)}{P(D)}\)</span></p>
+<p>which says…the probability of the hypothesis (or model or parameter) <em>given</em> the data is equal to the probability of the data <em>given</em> the hypothesis times the probability of the hypothesis. This is the normalized by the probability of the data.</p>
+<p>These probabilities all have names:</p>
+<ul>
+<li>P(H|D) = posterior probability</li>
+<li>P(D|H) = likelihood</li>
+<li>P(H) = prior probability</li>
+<li>P(D) = normalizer</li>
+</ul>
+<p>Note that we almost never know P(D) and we will often use total probability to calculate it:</p>
+<p><span class="math inline">\(P(D) = \sum_h P(D|H=h)P(H=h)\)</span></p>
+<p>Remember what our notation means. By solving for <span class="math inline">\(P(H|D)\)</span> we are solving for all the hypotheses and all the data outcomes at once. This means the posterior distribution described by <span class="math inline">\(P(H|D)\)</span> is not a single probability distribution but many. For a <em>single</em> hypothesis, we would have something like:</p>
+<p><span class="math inline">\(P(h1|D) = \frac{P(D|h1)P(h1)}{P(D)}\)</span></p>
+<p>Note that the denominator does entail all hypotheses. We often end up having to use the rule of Total Probability here:</p>
+<p><span class="math inline">\(P(h1|D) = \frac{P(D|h1)P(h1)}{P(D|h1)P(h1) + P(D|h2)P(h2) + \dots + P(D|h_n)P(h_n)}\)</span></p>
+<p>Bayes Rule is particularly important to data science because it says exactly how we should change our degree of certainty given new evidence. It also plays a foundational role in several machine learning techniques (Naive Bayes Classifier, Bayesian Belief Networks). It is also the main formula for Bayesian <em>inference</em>.</p>
+<p>We will spend an entire later chapter on Bayes Rule because of its central role in inference.</p>
+</div>
+</div>
+<div id="independence-and-conditional-independence" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Independence and Conditional Independence</h2>
+<p>From before, we manipulated the definition of conditional probability as follows:</p>
+<p><span class="math inline">\(P(A|B) = \frac{P(A,B)}{P(B)}\)</span></p>
+<p>and re-arrange:</p>
+<p><span class="math inline">\(P(A,B) = P(A|B)P(B)\)</span></p>
+<p>Remember our interpretation of conditional probability: knowing what event in B happened gives us additional information that influences our expectations about which event in A will happen. If it doesn’t, then:</p>
+<p><span class="math inline">\(P(A, B) = P(A)P(B)\)</span></p>
+<p>in which case A and B are said to be independent. This is known as the Multiplication Rule of Probability.</p>
+<p>In the previous section on Probability Rules, we introduced the Chain Rule. The Chain Rule basically gives us permission to factor a joint probability distribution however we please. For example, we might have:</p>
+<p><span class="math inline">\(P(A, B, C) = P(A|B, C)P(B|C)P(C)\)</span></p>
+<p>we can also do the same with a conditional <em>joint</em> probability:</p>
+<p><span class="math inline">\(P(A,B| C) = P(A|B, C)P(B|C)\)</span></p>
+<p>This says we can factor our uncertainty in the joint events of A and B given some known event in C into two parts: the uncertainty over an event in A given events in B and C are known times the uncertainty in an event in B given the event in C is known.</p>
+<p>For a concrete example, consider a joint probability of Religion, Party and Wealth. That’s <span class="math inline">\(P(A, B, C)\)</span> or <span class="math inline">\(P(Party, Wealth, Religion)\)</span>. Now suppose we condition on <span class="math inline">\(Religion\)</span> so we have <span class="math inline">\(P(Party, Wealth | Religion)\)</span>. We’re now describing our uncertainty over someone’s Party and Wealth given we know their Religion. What the above says is that we can factor that into two parts. The first part is the probability of Party given we know their Wealth and Religion and the second part is the probability of Wealth given we know their Religion.</p>
+<p>Returning to the example, however, if the following is true:</p>
+<p><span class="math inline">\(P(A,B|C) = P(A|C)P(B|C)\)</span></p>
+<p>then we can say that A and B are conditionally independent given C. Note that the above can be true and that the following is also true:</p>
+<p><span class="math inline">\(P(A, B) \neq P(A)P(B)\)</span></p>
+<p>The one does not imply the other.</p>
+<p>There are many applications in statistics and machine learning that either require or assume independence or conditional independence.</p>
+</div>
+<div id="probabilistic-fallacies" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Probabilistic Fallacies</h2>
+<p>As it turns out, people in general are not particularly good with probabilities and make quite a few mistakes. These mistakes are <em>fallacies</em> in probabilistic reasoning just as there are reasoning and argument errors in general (for example, <em>ad hominem</em> arguments).</p>
+<div id="conjunction-fallacy" class="section level3" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Conjunction Fallacy</h3>
+<p>Monotonicity plays a very important role in judging the probabilities of events. Perhaps the most famous example arises in the form of the Conjunction Fallacy illustrated as follows:</p>
+<blockquote>
+<p>Linda is 31 years old, single, outspoken, and very bright. She majored in philosophy. As a student, she was deeply concerned with issues of discrimination and social justice and participated in anti-nuclear demonstrations.</p>
+</blockquote>
+<blockquote>
+<p>Which is more probable?</p>
+</blockquote>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>Linda is a bank teller.</li>
+<li>Linda is a bank teller and active in the feminist movement.</li>
+</ol>
+</blockquote>
+<p>The majority of people, when asked, picked #2 but this cannot be. If B is the set of all tellers then the set of feminist bank tellers is likely smaller, a subset of A of B. It cannot be <em>larger</em>. Being an element of A cannot be more probable than being an element of A and B.</p>
+<p>This basically says that <span class="math inline">\(P(A=a) &lt;= P(A=a, B=b)\)</span>. Note that this is not the same thing as what we said before with <em>conditional</em> probability because we are talking about <em>joint</em> probability here.</p>
+<p>The main problem here actually seems to be confusing <em>joint</em> and <em>conditional</em> probabilities. Still, generally, the more specific you are, the less probable it is. We will see later that this is important for designing experiments and analyzing data.</p>
+</div>
+<div id="gamblers-fallacy-and-hot-streak-fallacy" class="section level3" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Gambler’s Fallacy and Hot-Streak Fallacy</h3>
+<p>A common fallacy is that there is some sort of overarching or underlying power or force that keeps probabilities in balance. The most common way that this fallacy shows itself is as the <a href="https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy">Gambler’s Fallacy</a>. In the Gambler’s Fallacy, the person incorrectly believes that because a rare event has not happened, it’s time must come or it must happen in order to balance the probabilities in some way. For example, if “red 13” has not come up in Roulette for a while, then this “must” happen any time now.</p>
+<p>The Hot-Streak Fallacy is similar in that it assumes that some extraordinary event must continue to happen. However, some research has shown that in certain cases, this is not necessarily true <a href="https://www.gsb.stanford.edu/insights/jeffrey-zwiebel-why-hot-hand-may-be-real-after-all">“Hot Hand” is not an illusion</a>.</p>
+<p>This is a very easy mistake to make so Data Scientists and consumers of Data Science must be especially wary of this particular fallacy.</p>
+</div>
+<div id="inverse-probability-fallacy" class="section level3" number="4.7.3">
+<h3><span class="header-section-number">4.7.3</span> Inverse Probability Fallacy</h3>
+<p>The Inverse Probability Fallacy relates to conditional probabilities, specifically by believing that the following are the same:</p>
+<p><span class="math inline">\(P(A|B) = P(B|A)\)</span></p>
+<p>A concrete example of this fallacy would involve making the following claim:</p>
+<p><span class="math inline">\(P(rain|prediction) = P(prediction|rain)\)</span></p>
+<p>Here we are saying that the probability of rain <em>given</em> that rain was predicted is equal to the probability of a prediction for rain <em>given</em> that it is raining. These are two entirely different things. Remember that probability is just counting and normalization.</p>
+<p>In the first case, we count all the times where it rained given a prediction of rain. In the second case, we count all the times rain was predicted given that it rained. You can think of a table like so:</p>
+<table>
+<thead>
+<tr class="header">
+<th>actual</th>
+<th>prediction</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>yes</td>
+<td>no</td>
+</tr>
+<tr class="even">
+<td>yes</td>
+<td>yes</td>
+</tr>
+<tr class="odd">
+<td>no</td>
+<td>yes</td>
+</tr>
+<tr class="even">
+<td>yes</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p>In the first case, we add up all the times where actual is yes and prediction is yes but divide by the times that prediction is yes (regardless of actual). In the second case, we add up all the times where actual is yes and prediction is yes but divide by the times that actual is yes (regardless of prediction).</p>
+<p>These will not necessarily lead to the same number.</p>
+</div>
+<div id="base-rate-fallacy" class="section level3" number="4.7.4">
+<h3><span class="header-section-number">4.7.4</span> Base Rate Fallacy</h3>
+<p>Suppose we’re asked what religion we think Garth is and, knowing that he’s from middle America, we can guess that he’s notionally a Christian. Suppose we further learn that Garth is a goth and wears dark clothing with various mystical symbols on it, our estimation of Garth’s religion would probably swing in the direction of being a Satanist.</p>
+<p>However, the base rate (prior) of being a Satanist is really quite low. There are 2,000,000,000 Christians in the world and only 100,000s of Satanists. While the probability of Garth being a Christian might go down, knowing that Garth is a goth shouldn’t really flip our sense of the probability from most likely a Christian to most likely a Satanist. Doing this is called the <a href="https://en.wikipedia.org/wiki/Base_rate_fallacy">Base Rate Fallacy</a>.</p>
+<p>This is also related to Bayes Rule which tells us exactly how much we should change our prior when reviewing evidence. The difference between the posterior and prior is the <em>incremental evidence</em> whereas the posterior alone is the <em>total evidence</em>. The Base Rate fallacy can also be attributed to confusing incremental evidence and total evidence when the base rate is low. Upon learning that Garth dresses in black, wears eyeliner and black fingernail polish, we adjust our beliefs about his religion. But to conclude that he’s a Satanist, ignoring the base rate, is to improperly change our beliefs based on the evidence alone.</p>
+</div>
+<div id="prosecutors-fallacy" class="section level3" number="4.7.5">
+<h3><span class="header-section-number">4.7.5</span> Prosecutor’s Fallacy</h3>
+<p>This fallacy refers to a Prosecutor (and sometimes Defense Attorneys) arguing the wrong thing. This can result in a mistrial. As it turns out this rarely happens among the attorneys but can happen to expert testimony. This is really a family of fallacies the first of which relates to Bayes Rule and is related to the Inverse Probability Fallacy:</p>
+<p><span class="math inline">\(P(innocence|evidence) = \frac{P(evidence|innocence)P(innocence)}{P(evidence)}\)</span></p>
+<p>The <a href="https://en.wikipedia.org/wiki/Prosecutor%27s_fallacy">Fallacy</a> is committed when the prosecutor assumes that just because the damning evidence is small <span class="math inline">\(P(evidence|innocence)\)</span> (“if he were innocent, the evidence would be really unlikely”) that <span class="math inline">\(P(innocence|evidence)\)</span> must be equally as small. This happens a lot with forensic evidence, especially DNA evidence. But it simply isn’t true that if <span class="math inline">\(P(evidence|innocence) = 1:1,000,000\)</span> that <span class="math inline">\(P(innocence|evidence) = 1:1,000,000\)</span>.</p>
+<p>Another version of the Fallacy confuses the prior and conditional probabilities, that is, it assumes that <span class="math inline">\(P(A)=P(A|B)\)</span> and is thus related to the Base Rate Fallacy.</p>
+</div>
+</div>
+<div id="applications" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Applications</h2>
+<p>We can solidify our understanding of probability, conditional probability and Bayes Rule by going over some problems, some of which are quite famous. We’ll start first with some general probability problems and then move in the second part to problems using Bayes Rule.</p>
+<p>Most of these problems come from Allen Downey’s excellent book <a href="http://greenteapress.com/wp/think-bayes/">Think Bayes</a>.</p>
+<p>Some of these problems are just calculations, either by hand or by computer. Others involve answering questions with simulations in order to calculate probabilities. You may be called upon to do something similar as a data scientist. For example, you have just fielded an advertising campaign in 20 major cities. Testing showed that advertising campaign was 10 percent better than the previous one. However, the last three weeks of returns in New York have been below average. What is the probability of this happening given that the campaign really is 10 percent better?</p>
+<div id="applications-in-general-probability" class="section level3" number="4.8.1">
+<h3><span class="header-section-number">4.8.1</span> Applications in General Probability</h3>
+<p>These problems are general probability problems (although the Monty Hall problem can be solved using Bayes Rule).</p>
+<div id="a-girl-named-florida" class="section level4" number="4.8.1.1">
+<h4><span class="header-section-number">4.8.1.1</span> A Girl Named Florida</h4>
+<p>Consider the following problems: we have a family with two children.</p>
+<ul>
+<li>What is the probability that they are both girls?</li>
+</ul>
+<p>To answer this question, we have have to make some assumptions about the probability of a child being either a boy or girl (which we will take to mean either XX or XY chromosomes). The generally accepted probabilities are P(boy) = 0.5 and P(girl) = 0.5 (ignoring other chromosomal possibilities).</p>
+<p>Recall our definition of independence. Two sets of events, <span class="math inline">\(A\)</span> and <span class="math inline">\(B\)</span>, are independent if the following holds true:</p>
+<p><span class="math display">\[P(A, B) = P(A)P(B)\]</span></p>
+<p>but that’s how we determine that A and B are independent. If we <em>assume</em> that the events are independent, then we can turn it around to calculate the probability of the joint event:</p>
+<p><span class="math display">\[P(A)P(B) = P(A, B)\]</span></p>
+<p>Here <span class="math inline">\(A\)</span> is the “sex of the first child” and <span class="math inline">\(B\)</span> is the “sex of the second child”. This means we can take P(A=girl) as 0.5 and P(B=girl) as 0.5–shortened to P(girl) x P(girl)– which equals 0.5 x 0.5 = 0.25.</p>
+<p>Note that if we wanted to calculate the probability of them being different sexes, then we’d have to calculate the probability of having a boy then a girl (0.5 x 0.5 = 0.25) and the probability of having a girl then a boy (0.5 x 0.5 = 0.25) and combine them based on the Additive Law of Probability: 0.25 + 0.25 = 0.50.</p>
+<p>But remember how I said probability is just counting?</p>
+<p>There are 4 possibilities:</p>
+<ol style="list-style-type: decimal">
+<li>Boy, Girl.</li>
+<li>Girl, Boy.</li>
+<li>Girl, Girl.</li>
+<li>Boy, Boy.</li>
+</ol>
+<p>There is only one way in which both children are girls so the probability of two girls is 1/4 = 0.25. There are two ways in which the children are mixed sexes so the probability of that joint event is 2/4 = 1/2 = 0.5.</p>
+<ul>
+<li>What is the probability that they are both girls given that at least one is a girl?</li>
+</ul>
+<p>Now there are only 3 possibilities–the ones that include a Girl as either the first or the second birth:</p>
+<ol style="list-style-type: decimal">
+<li>Boy, Girl.</li>
+<li>Girl, Boy.</li>
+<li>Girl, Girl.</li>
+</ol>
+<p>Using the counting method, we can see that there is only one way to get the result we’re interested in and three possible outcomes so the probability is 1/3.</p>
+<p>Using the mathy way, we know from above that probability of the individual outcomes are each 1/4 or 0.25:</p>
+<ol style="list-style-type: decimal">
+<li>Boy, Girl = 1/4</li>
+<li>Girl, Boy. = 1/4</li>
+<li>Girl, Girl. = 1/4</li>
+</ol>
+<p>However, since we have ruled out the {Boy, Boy} possibility by assumption, we have to renormalize the probabilities. Normalization just means “make all the probabilities add up to 1 again” and you do this by adding the probabilities together (which is 3/4) and dividing each original probability by this <em>normalizer</em>:</p>
+<ol style="list-style-type: decimal">
+<li>Boy, Girl = 1/4 // 3/4 = 1/3</li>
+<li>Girl, Boy. = 1/4 // 3/4 = 1/3</li>
+<li>Girl, Girl. = 1/4 // 3/4 = 1/3</li>
+</ol>
+<p>And we get 1/3 as before. The reason we show both ways to get the answer is because, as you might expect, there are cases–most cases–where the counting approach isn’t tractable.</p>
+<ul>
+<li>What is the probability that they are both girls given that the oldest (first) is a girl?</li>
+</ul>
+<p>We do the same thing again except that any outcome that has a Boy as the oldest is removed:</p>
+<ol style="list-style-type: decimal">
+<li>Girl, Boy. = 1/4</li>
+<li>Girl, Girl. = 1/4</li>
+</ol>
+<p>And again, we need to have our probabilities add up to 1 so we normalize them:</p>
+<ol style="list-style-type: decimal">
+<li>Girl, Boy. = 1/4 // 2/4 = 1/2</li>
+<li>Girl, Girl. = 1/4 // 2/4 = 1/2</li>
+</ol>
+<p>If you think about it a second, this makes perfect sense…the events are independent so knowing that the first is a girl doesn’t give us any information about the second child’s sex.</p>
+<p>That was a fairly typical probability problem. There is a crazy variant that asks:</p>
+<ul>
+<li>What is the probability that they are both girls given that one of them is a girl named Florida?</li>
+</ul>
+<p>Think about it. Does the name change anything?</p>
+<p>We’re now going to switch to problems where simulation is often a useful tool. If you ever have a probability problem that you can’t quite formulate right or if someone doesn’t believe your answer, think: can I simulate this?</p>
+</div>
+<div id="birthday-problem" class="section level4" number="4.8.1.2">
+<h4><span class="header-section-number">4.8.1.2</span> Birthday Problem</h4>
+<p>The Birthday Problem is as follows: what is the probability that two people in a given group of size <span class="math inline">\(N\)</span>, have the same birthday (month and day)?</p>
+<ol style="list-style-type: decimal">
+<li>Guess. What do you think the probability is? 10%, 20%, 30%…100%?</li>
+<li>Think about how you might answer this mathematically.</li>
+<li>Think about how you might solve this easily as a simulation. What assumptions do you need to make?</li>
+</ol>
+<p>We’re going to simulate the problem by writing a few functions. The first function takes <span class="math inline">\(k\)</span> persons as an argument and assigns them randomly to one of the 365 days of the year (we ignore leap years). As we do so, we count how many people have that birthday.</p>
+<p>First some imports…</p>
+<pre><code>from random import randint, uniform
+from collections import defaultdict</code></pre>
+<p>We used <code>defaultdict</code> because missing keys are automatically assigned a value of <code>0</code> instead of it causing a KeyError.</p>
+<pre><code>def tally_k_birthdays( k):
+    counts = defaultdict( int)
+    for i in range( 0, k):
+        birthday = randint( 1, 365)
+        counts[ birthday] += 1
+    return counts</code></pre>
+<p>Let’s see what we get for 10 people:</p>
+<pre><code>tally_k_birthdays( 10)</code></pre>
+<p>Now all we need to do is take this dictionary of values and see if any of the days (we only need one) has a count greater than one which would mean that two (or more) people have the same birthday:</p>
+<pre><code>def identify_same_birthdays( counts_of_birthdays):
+    for day in counts_of_birthdays.keys():
+        if counts_of_birthdays[ day] &gt; 1:
+            return True
+    return False</code></pre>
+<p>In general, in order to get a good result from a simulation, it must be run multiple times and the results averaged. We write a function to do just that. The arguments are <span class="math inline">\(N\)</span> people and <span class="math inline">\(times\)</span> simulations.</p>
+<pre><code>def sample_group( N, times):
+    match = 0.0
+    for i in range( times):
+        birthday_count = tally_k_birthdays( N)
+        if identify_same_birthdays( birthday_count):
+            match += 1.0
+    return match / times</code></pre>
+<p>We can now run the function and see approximately what the probability is for two people to have the same birthday in a class with <span class="math inline">\(N=26\)</span> students:</p>
+<pre><code>sample_group( 26, 10000)</code></pre>
+<p>It’s much more probable than people usually think.</p>
+<p>This is a good example of a simple simulation for a system process. Again, in theory, everything is fairly deterministic. Parents decided to have children, the children were born on certain days, the children grew up and where in a particular class (one such situation) or they got older and went to university (another situation) or took up an interest in art and when to an art gallery (another such situation) and in all cases the simulation works.</p>
+<p>It doesn’t work if an assumption if violated. If the situation is a Meetup for People born in March, we would need an entirely different situation.</p>
+<ol style="list-style-type: decimal">
+<li>Can you reprogram the simulation to see how many people it takes to have a 50% probability of someone with the same birthday, if everyone is born in the same month?</li>
+</ol>
+</div>
+<div id="monty-hall-problem" class="section level4" number="4.8.1.3">
+<h4><span class="header-section-number">4.8.1.3</span> Monty Hall Problem</h4>
+<p>Monty Hall was the host for <em>Let’s Make a Deal</em> before Wayne Brady. One of the “bits” on the show involved picking a curtain in hopes of winning a great prize like a car and this probability problem is based on it. It’s actually a very famous problem.</p>
+<p>There are three curtains: 1, 2, and 3. Behind one of those curtains is a car. On the show, the other curtains often had gag gifts behind them like a goat but we assume they’re empty. The contestant picks the curtain they believe hides the car. After picking, Monty reveals what is behind one of the other curtains. One important assumption is that if the contestant <em>has</em> picked the car, Monty reveals one of the other two curtains at random.</p>
+<p>The contestant is then given the option to either stick with the curtain they picked or switch to the remaining curtain. The question is this: should the contestant switch? What do you think?</p>
+<p>There are a number of ways to answer this question but we’re going to use simulation because that’s often the most definitive. In fact, Paul Erdos, the famous mathematician, would not believe the correct answer until it was simulated.</p>
+<p>First, we have a function that simulates one Monty Hall “Problem”. It basically says:</p>
+<ol style="list-style-type: decimal">
+<li>set up the problem</li>
+<li>place the car at random.</li>
+<li>generate a random contestant pick.</li>
+<li>figure out which curtain to reveal.</li>
+<li>figure out which curtain is closed.</li>
+<li>if do_switch is True, make the pick equal to the closed curtain. Otherwise, keep it the same.</li>
+<li>return if the picked curtain equals the car’s curtain (True or False).</li>
+</ol>
+<pre><code>def evaluate_a_monty_hall_scenario( do_switch=False):
+    options = {1, 2, 3}
+    car = randint( 1, 3)
+    pick = randint( 1, 3)
+    opened = list( options.difference( {car}).difference( {pick}))[0]
+    closed = list( options.difference( {pick}).difference( {opened}))[0]
+    if do_switch:
+        pick = closed
+    return car == pick</code></pre>
+<p>Let’s run it 10 times:</p>
+<pre><code>for i in range( 0, 10):
+    print( evaluate_a_monty_hall_scenario(True))</code></pre>
+<p>We’re now going to run the Monty Hall problem function 10,000 times and evaluate what happens first, if you don’t switch and second, if you switch:</p>
+<pre><code>def evaluate_monty_hall_problem( switch=False):
+    trials = 10000
+    count = 0
+    for i in range( 0, trials):
+        result = evaluate_a_monty_hall_scenario( switch)
+        if result:
+            count += 1
+    return float( count) / trials</code></pre>
+<pre><code>evaluate_monty_hall_problem()</code></pre>
+<pre><code>evaluate_monty_hall_problem(True)</code></pre>
+<p>And there you have it, if you switch, you win the car 66% of the time.</p>
+</div>
+</div>
+<div id="applications-of-bayes-rule" class="section level3" number="4.8.2">
+<h3><span class="header-section-number">4.8.2</span> Applications of Bayes Rule</h3>
+<p>Speaking of switching, one of the main types of problems we’ll be solving are problems involving Bayes Rule. In fact, Bayesian Inference depends entirely on understanding Bayes Rule and evaluating it for a large number of possibilities. We’ll start out with smaller problems.</p>
+<p>For whatever reason, Bayes Rule examples are either weather or medical tests. We’ll start with the weather:</p>
+<div id="rain-or-shine" class="section level4" number="4.8.2.1">
+<h4><span class="header-section-number">4.8.2.1</span> Rain or Shine</h4>
+<p>Sam is getting married tomorrow in an outdoor ceremony in the desert. In recent years, it has only rained 5 days per year. Unfortunately, the meteorologist has predicted rain for tomorrow. Should Sam rent a tent for the ceremony?</p>
+<p>We can solve this problem using Bayes Rule which remember is:</p>
+<p><span class="math display">\[P(A|B) = \frac{P(B|A)P(A)}{P(B)}\]</span></p>
+<p>But instead what we want is:</p>
+<p><span class="math display">\[P(W|F) = \frac{P(F|W)P(W)}{P(F)}\]</span></p>
+<p>where <span class="math inline">\(W\)</span> is weather (rain or shine) and <span class="math inline">\(F\)</span> is forecast (rain or shine). Remember that <span class="math inline">\(P(W)\)</span> in the numerator is our <em>prior</em> probability. What <em>is</em> our prior probability? Well, it only rains 5 days a year on average:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">rain</th>
+<th align="center">shine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">5/365 = 0.0137</td>
+<td align="center">360/365 = 0.9863</td>
+</tr>
+</tbody>
+</table>
+<p>I think this is what Sam had in mind when he planned his wedding.</p>
+<p>But now he needs to take new evidence into account: a forecast of rain. The likelihood <span class="math inline">\(P(F|W)\)</span> is essentially the probability of the meteorologist being correct: given that it rained, what is the probability that it was forecast? Sam looks this up on the Internet.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">F</th>
+<th align="center">rain</th>
+<th align="center">shine</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">rain</td>
+<td align="center">0.8</td>
+<td align="center">0.2</td>
+</tr>
+<tr class="even">
+<td align="center">shine</td>
+<td align="center">0.2</td>
+<td align="center">0.8</td>
+</tr>
+</tbody>
+</table>
+<p>What does this mean? <em>Given</em> that it rained, there is an 80% chance there was a forecast of rain:</p>
+<p><span class="math inline">\(F(F=rain|W=rain) = 0.8\)</span></p>
+<p>Because it <em>will</em> be confusing, we do not take shortcuts here. We will use the longhand notation, F=rain and W=rain, to distinguish the two events. Up above, we had Bayes Rule defined over entire random variables.</p>
+<p>What does it look like for the specific outcome we’re interested in?</p>
+<p><span class="math display">\[P(W=rain|F=rain) = \frac{P(F=rain|W=rain)P(W=rain)}{P(F=rain)}\]</span></p>
+<p>We have everything we need except the denominator. We can use total probability for it, though:</p>
+<p><span class="math inline">\(P(F=rain) = P(F=rain|W=rain)P(W=rain) + P(F=rain|W=shine)P(W=shine)\)</span></p>
+<p><span class="math inline">\(0.8 \times 0.0137 + 0.2 \times 0.9863 = 0.208\)</span></p>
+<p>and now we have:</p>
+<p><span class="math inline">\(P(W=rain|F=rain) = \frac{0.8 \times 0.0137}{0.208} = 0.053\)</span></p>
+<p>So really, Sam should just go ahead with the wedding (at least from a weather perspective).</p>
+</div>
+<div id="breast-cancer" class="section level4" number="4.8.2.2">
+<h4><span class="header-section-number">4.8.2.2</span> Breast Cancer</h4>
+<p>The logic underlying this problem is why certain routine screenings for breast cancer were discontinued. The numbers, however, are made up.</p>
+<p>1% of women at age 40 who participate in routine screening have breast cancer. 80% of women with breast cancer will get positive mammographies. 9.6% of women without breast cancer will also get positive mammographies. A woman in the age group had a positive mammography. What is the probability of her having breast cancer?</p>
+<p>We have two variables, each with two outcomes: <span class="math inline">\(M\)</span> is {pos, neg}, and <span class="math inline">\(C\)</span> is {yes, no}. As before, we need to set up Bayes Rule and determine either what information we have and what information we need to calculate.</p>
+<p><span class="math display">\[P(yes|pos) = \frac{P(pos|yes)P(yes)}{P(pos)}\]</span></p>
+<p>We have the prior, <span class="math inline">\(P(yes)\)</span> which is simply 0.01. We have the likelihood we need which is established in the second sentence: <span class="math inline">\(P(pos|yes)\)</span> = 0.8 (which means that <span class="math inline">\(P(neg|yes)\)</span> = 0.2. We don’t have <span class="math inline">\(P(pos)\)</span>. We will need to use total probability again.</p>
+<p><span class="math inline">\(P(pos) = P(pos|yes)P(yes) + P(pos|no)P(no)\)</span></p>
+<p>We have <span class="math inline">\(P(pos|no)\)</span> from the 3rd sentence: 0.096. Note that this clearly shows where total probability comes from. If we want to calculate the probability of a positive test result, we need to take into account all the possible sources of positive test results. These come from those with cancer who get a positive test result (the first term) and those without cancer who get a positive test result (the second term). The probability of not having cancer is just 1 - P(yes).</p>
+<p><span class="math inline">\(P(pos) = 0.8 \times 0.01 + 0.096 \times 0.99 = 0.103\)</span></p>
+<p>and now we can just plug in the numbers.</p>
+<p><span class="math inline">\(P(yes|pos) = \frac{0.8 * 0.01}{0.103} = 0.078\)</span></p>
+<p>This result makes an important assumption, though, the only information about this woman’s status is that this was a routine screening. Why might this not be the case?</p>
+<p>OK, we’re computer scientists…enough math. We can let computers do the math.</p>
+</div>
+<div id="elvis" class="section level4" number="4.8.2.3">
+<h4><span class="header-section-number">4.8.2.3</span> Elvis</h4>
+<p>Apparently Elvis was one of a set of twins. He had a twin brother who died at birth. We want to know the probability that Elvis had an identical twin. This isn’t really enough information to answer anything so…</p>
+<p>Wikipedia to the rescue…“Twins are estimated to be approximately 1.9% of the world population, with monozygotic twins making up 0.2% of the total, 8% of all twins”.</p>
+<p>You should solve this by hand right now, writing out the problem. It might surprise you how difficult it is to get started. Consider the following…what is the event we want to know about and what is the evidence?</p>
+<p>So the evidence is that the child was male and the event we’re trying to determine the probability of is that Elvis and the child were identical twins:</p>
+<p><span class="math display">\[P(I|M) = \frac{P(M|I)P(I)}{P(M)}\]</span></p>
+<p>I’m going to start out with a helper function that normalizes a probability distribution the way I have decided to represent it (as a map):</p>
+<pre><code>def normalize( dist):
+    normalizer = sum( dist.values())
+    for k in dist.keys():
+        dist[ k] = dist[ k] / normalizer
+    return dist ## don&#39;t need to do this.</code></pre>
+<p>I’m describing the events as <strong>I</strong>dentical twin or <strong>F</strong>raternal twin. The probabilities come from the Wikipedia article. In Python, it is very convenient to represent a discrete Probability distribution with a Dict where the keys are outcomes {“I”, “F”} and the values are the probabilities of those outcomes.</p>
+<pre><code>elvis_prior = {&quot;I&quot;: 0.08, &quot;F&quot;: 0.92}</code></pre>
+<p>Here we use a Dict to express a likelihood which ends up as a nested Dict. Remember that <span class="math inline">\(P(A|B)\)</span> is a Probability distribution for each value of “B”. In this case, the outer key is the “given” so that we can say “given I” and look up the appropriate probability distribution. The inner Dict represents the probability distribution over the events of “A”, in this case the sex of the baby, <strong>M</strong>ale or <strong>F</strong>emale.</p>
+<pre><code>elvis_likelihoods = {
+  &quot;I&quot;: { &quot;M&quot;: 1.00, &quot;F&quot;: 0.00},
+  &quot;F&quot;: { &quot;M&quot;: 0.50, &quot;F&quot;: 0.50}
+}</code></pre>
+<p>Below is a function that will calculate the posterior probability for the entire probability distribution (over all events). As we’ve mentioned before, in Bayes Rule:</p>
+<p><span class="math inline">\(P(A|B) = \frac{P(B|A)P(A)}{P(B)}\)</span></p>
+<p>we are calculating an entire posterior probability <em>distribution</em>…a probability for each value of A given each value of B. Additionally, it is unlikely that we know the value of the normalizer <span class="math inline">\(P(B)\)</span> directly. However, we can calculate <span class="math inline">\(P(B)\)</span> using the Rule of Total Probability:</p>
+<p>$P(B) = P(B|A=a_1)P(A=a_1) + P(B|A=a_2)P(A=a_2) + … + <span class="math inline">\(P(B|A=a_n)P(a_n)\)</span></p>
+<p>but it turns out that if we are interested in the probability of every hypothesis in A, we are going to calculate all of these values anyway. We don’t need to go through any extra effort. First we note that if we are only concerned about <em>order</em> we do not need to normalize so we have:</p>
+<p><span class="math inline">\(P(A=a_1|B) \propto P(B|A=a_1)P(A=a_1)\)</span></p>
+<p><span class="math inline">\(P(A=a_2|B) \propto P(B|A=a_2)P(A=a_2)\)</span></p>
+<p><span class="math inline">\(P(A=a_n|B) \propto P(B|A=a_n)P(A=a_n)\)</span></p>
+<p>where <span class="math inline">\(\propto\)</span> means “proportional to”. We can calculate all of these without calculating the normalizer, <span class="math inline">\(P(B)\)</span>. But having calculated all those terms, we have calculated the terms we need to compute the normalizer and calculate the actual probabilities:</p>
+<p><span class="math inline">\(P(A=a_1|B) = \frac{P(B|A=a_1)P(A=a_1)}{P(B)}\)</span></p>
+<p><span class="math inline">\(P(A=a_2|B) = \frac{P(B|A=a_2)P(A=a_2)}{P(B)}\)</span></p>
+<p><span class="math inline">\(P(A=a_n|B) = \frac{P(B|A=a_n)P(A=a_n)}{P(B)}\)</span></p>
+<p>This is what the following function does, although for all values of A and B.</p>
+<pre><code>def query( prior, likelihoods, evidence):
+    posterior = {}
+    for k in prior.keys():
+        posterior[ k] = likelihoods[ k][ evidence] * prior[ k]
+    normalize( posterior)
+    return posterior</code></pre>
+<p>Now we can print out the prior probability and the posterior probability:</p>
+<pre><code>print( &quot;prior=&quot;, elvis_prior)
+print( &quot;posterior=&quot;, query( elvis_prior, elvis_likelihoods, &quot;M&quot;))</code></pre>
+<p>The evidence (that the other child was a boy), increases the probability that they were identical twins (if the other child had been female, it would have been impossible).</p>
+<p>What other piece of evidence is implicit in this calculation?</p>
+</div>
+<div id="m-ms" class="section level4" number="4.8.2.4">
+<h4><span class="header-section-number">4.8.2.4</span> M &amp; M’s</h4>
+<p>Here is a bit more challenging problem.</p>
+<p>A friend shows me two bags of M&amp;M’s and tells me that one is from 1994 and the other is from 1996. He won’t tell me which is which but gives me an M&amp;M from each bag. Which bag is which?</p>
+<p>So the first step is map out the events we’re trying to predict and the evidence. I’ll use the same basic approach as before, representing probability distributions as Dicts.</p>
+<p>The key information, however, is that the blue M&amp;M was introduced in 1995. Before that the color mixes in the bags where:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="center">color</th>
+<th align="center">1994</th>
+<th align="center">1996</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">brown</td>
+<td align="center">30%</td>
+<td align="center">13%</td>
+</tr>
+<tr class="even">
+<td align="center">yellow</td>
+<td align="center">20%</td>
+<td align="center">14%</td>
+</tr>
+<tr class="odd">
+<td align="center">red</td>
+<td align="center">20%</td>
+<td align="center">13%</td>
+</tr>
+<tr class="even">
+<td align="center">green</td>
+<td align="center">10%</td>
+<td align="center">20%</td>
+</tr>
+<tr class="odd">
+<td align="center">orange</td>
+<td align="center">10%</td>
+<td align="center">16%</td>
+</tr>
+<tr class="even">
+<td align="center">tan</td>
+<td align="center">10%</td>
+<td align="center">0%</td>
+</tr>
+<tr class="odd">
+<td align="center">blue</td>
+<td align="center">0%</td>
+<td align="center">24%</td>
+</tr>
+</tbody>
+</table>
+<p>(I’m not sure where this data came from!)</p>
+<p>You should try to solve this for yourself before looking at my solution.</p>
+<p>Here is the prior distribution for the 1994 bag:</p>
+<pre><code>mix94 = dict(brown=0.3, yellow=0.2, red=0.2, green=0.1, orange=0.1, tan=0.1)
+mix94</code></pre>
+<p>and the prior distribution for the 1996 bag:</p>
+<pre><code>mix96 = dict(blue=0.24, green=0.2, orange=0.16, yellow=0.14, red=0.13, brown=0.13)
+mix96</code></pre>
+<p>Now, my two possible events are: either the first bag is the 1994 bag (A) or the first bag is the 1996 bag (B):</p>
+<pre><code>A = dict(bag1=mix94, bag2=mix96)
+B = dict(bag1=mix96, bag2=mix94)</code></pre>
+<p>which gives me my likelihoods:</p>
+<pre><code>m_m_likelihoods = {&quot;A&quot;: A, &quot;B&quot;: B}
+m_m_likelihoods</code></pre>
+<p>This is a more complex likelihood than we’re used to seeing.</p>
+<p>Given that event A happened (1994 bag), then the probability of picking a yellow M&amp;M from that bag is 20%. Given that event B happened (1996 bag), then the probability of picking a yellow M&amp;M out of that bag is 14%.</p>
+<p>Our prior is 50/50 for each of the events A and B because there are two bags.</p>
+<pre><code>m_m_priors = {&quot;A&quot;: 0.5, &quot;B&quot;: 0.5}</code></pre>
+<p>Our evidence is that I took a yellow M&amp;M out of Bag 1 and a green M&amp;M out of Bag 2:</p>
+<pre><code>m_m_evidences = [(&#39;bag1&#39;, &#39;yellow&#39;), (&#39;bag2&#39;, &#39;green&#39;)]</code></pre>
+<p>And now some code to massage it all together:</p>
+<pre><code>from copy import deepcopy
+
+def calculate_m_m_posteriors( priors, likelihoods, evidences):
+    posteriors = {}
+    current_priors = deepcopy( priors)
+    for evidence in evidences:
+        bag, mnm = evidence
+        for hypothesis in priors.keys():
+            posteriors[ hypothesis] = likelihoods[ hypothesis][ bag][ mnm] \
+              * current_priors[ hypothesis]
+        normalize( posteriors)
+        current_priors = posteriors
+        print( &quot;evidence=&quot;, evidence, &quot;posterior=&quot;, posteriors)
+    return posteriors</code></pre>
+<pre><code>print( &quot;prior&quot;, m_m_priors)
+calculate_m_m_posteriors( m_m_priors, m_m_likelihoods, m_m_evidences)</code></pre>
+<p>Based on the evidence, the more likely event is “A”…that the first bag is the 1994 bag of M&amp;Ms and the second bag is the 1996 bag of M&amp;Ms.</p>
+<p>One special thing to note about Bayes Rule is that it doesn’t matter if you take the evidence altogether or piece by piece (no pun intended). You will always get the same result. It’s slightly easier in this case to cycle through the evidence and use the posterior distribution that results as the <em>prior</em> distribution for the next calculation.</p>
+<p>This is the beauty of Bayes Rule (and makes it slightly easier to program).</p>
+<p>It is always worth noting that in all cases we used probability to deal with systems–processes–exhibiting uncertainty whether it was a breast cancer testing process, the weather, Elvis’s deceased twin or M&amp;M’s.</p>
+<ol style="list-style-type: decimal">
+<li>Can you solve the Monty Hall problem using Bayes Rule?</li>
+<li>Can you identify–even in the most general terms–the processes underlying each of these problems?</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="probability-and-simulation" class="section level2" number="4.9">
+<h2><span class="header-section-number">4.9</span> Probability and Simulation</h2>
+<p>Now it may turn out that you cannot easily describe your problem analytically or enumerate all the possibilities in which case you can turn to simulation to do you event generation and counting, to get the probabilities you’re interested in. Here’s an example that actually happened to me.</p>
+<div id="cities" class="section level3" number="4.9.1">
+<h3><span class="header-section-number">4.9.1</span> Cities</h3>
+<p>Some data scientists are involved in personalization at online retailers. They apply personalization models to different views of the products whether they are sales emails or on the website; anywhere there are default lists of products. Of course, not being content to rest on their laurels, these data scientists are constantly developing new personalization models. In order to test whether a new model is better than an old model, they engage in A/B testing. We’ll talk about A/B testing later in the book but for now, A/B testing just means dividing your, ahem, test subjects into two groups <em>completely at random</em>. Group A will get the <em>control</em> or existing personalization model. Group B will get the <em>treatment</em> or new personalization model. That sets up the context for the following problem in computational probability.</p>
+<p>Suppose you are one of those data scientists and have a personalization model that is being tested in 20 cities nationwide. Each city has 100,000 customers on the mailing list and you send an email every day.</p>
+<p>The test has been running a few days and it looks like the new model (called the “treatment”) is about 10% better than the current practice (“control”). Let us assume this is true (we’ll see later how to test this). After another week of testing, the director of marketing comes to you and is concerned that the new model has done very poorly in one of the cities 3 days in a row and opines that it must not really be 10% better.</p>
+<p>Is the director of marketing right? Does this mean the new model is worse than the current one? Maybe, maybe not. Deciding which model is better is a problem in inference. This isn’t really what the director of marketing is asserting, though. They’re asserting that the new model can’t be better if there is a losing streak of 3 days in one city. Now this <em>is</em> a question we can answer now, using computational probability.</p>
+<p>What we want to know–what the stakeholder needs to know–is, if the new model is definitely 10% better, what is the probability of seeing a string of 3 <em>worse</em> outcomes in a particular city? If the probability is high, then we needn’t worry. If the probability is low, we might be concerned about test.</p>
+</div>
+<div id="what-do-we-know" class="section level3" number="4.9.2">
+<h3><span class="header-section-number">4.9.2</span> What do we know?</h3>
+<ul>
+<li>20 cities</li>
+<li>Each city has 100,000 subscribers with the lists split in half for control and treatment.</li>
+<li>the purchase rate for control is 0.0001 (0.01%)</li>
+<li>the purchase rate for treatment is 0.00011 (0.011%)</li>
+<li>the lift is 0.011/0.010 = 1.1 - 1.0 = 10%</li>
+</ul>
+<p>These probably seem small but daily purchase rates are often small.</p>
+<p>Let’s start out by simulating a single day’s worth of purchases in a single city. We know what the ideal purchase rate is, but it’s not going to pan out to be the same exact thing everyday. We need to simulate those purchases and calculate the actual purchase rate:</p>
+<pre><code>from random import random, seed</code></pre>
+<pre><code>seed(128934662)</code></pre>
+<pre><code>def actual_purchase_rate( population, purchase_rate):
+    purchases = [1.0 if random() &lt; purchase_rate else 0.0 
+                 for i in range( population)]
+    return sum( purchases)/population</code></pre>
+<p>Let’s see how it does:</p>
+<pre><code>for _ in range( 5):
+    print( actual_purchase_rate( 50000, 0.0001))</code></pre>
+<p>These look reasonable.</p>
+<p>Now let’s simulate a comparison in outcomes for control and treatment in a city. If the control is better, we’ll say that’s “1.0” and if the treatment is better, we’ll say that’s “0.0”. Additionally, half of each mailing list gets control and half of each mailing list gets the treatment:</p>
+<pre><code>def difference_in_purchase_rates(population, control_rate, treatment_rate):
+    control_actual = actual_purchase_rate( population//2, control_rate)
+    treatment_actual = actual_purchase_rate( population//2, treatment_rate)
+    difference = 1.0 if control_actual &gt; treatment_actual else 0.0
+    return difference</code></pre>
+<p>Now let’s see how that looks:</p>
+<pre><code>for _ in range( 5):
+    print( difference_in_purchase_rates( 100000, 0.0001, 0.00011))</code></pre>
+<p>Now we want to see what happens over N days:</p>
+<pre><code>def simulate_difference_for_n_days(population, control_rate, treatment_rate, days):
+    return [difference_in_purchase_rates( population, control_rate, treatment_rate)
+            for i in range( days)]</code></pre>
+<p>Let’s see what it looks like over 30 days:</p>
+<pre><code>print( simulate_difference_for_n_days( 100000, 0.0001, 0.00011, 30))</code></pre>
+<p>There are a number of ways we might interpret the idea of a “streak”.</p>
+<ul>
+<li>A streak is N 1’s followed by a 0. For example, if N is 3, then we’re looking for something like 0, 1, 1, 1, 0.</li>
+<li>A streak is N or more 1’s followed by a 0. For example, if N is 3, then we’re looking for 0, 1, 1, 1, 0 but also 0, 1, 1, 1, 1, 0.</li>
+<li>A streak is any number of N 1’s for example if N is 3 and there are 5 1’s, then that’s 3 streaks (1, 2, 3), (2, 3, 4), (3, 4, 5).</li>
+</ul>
+<p>what kind of streak we’re looking for matters because it affects both identification of the event of interest and the number of possible events and thus affects our conclusions. Since probability is just counting, we need to make sure of what we’re counting.</p>
+<p>For this problem, let’s say that we’re interested in the 3rd one…we want to know whenever 3 days in a row have 1’s regardless of what happens before or after. This makes the simulation a bit easier because for a simulation of length M and a sequence of length N, there are M-N+1 such possible sequences.</p>
+<p>Let’s write a function that identifies these sequences:</p>
+<pre><code>def count_sequences( n, data):
+    all_sequences = [data[i:i+n] for i in range(len( data)-n+1)]
+    streaks = sum([1.0 if sum(xs) == float(n) else 0.0 for xs in all_sequences])
+    return streaks, len( all_sequences)</code></pre>
+<pre><code>data = simulate_difference_for_n_days( 100000, 0.0001, 0.00011, 30)
+print( data)
+streak, sequences = count_sequences( 3, data)
+print( streak, sequences, streak/sequences)</code></pre>
+<p>So that’s about a 7.1% chance of seeing a streak of 3 days at least once in a 30 day period in a single city. If we want to measure the average, we’d need to re-run the experiment a lot of times:</p>
+<pre><code>streaks = []
+sequences = []
+for i in range( 100):
+    data = simulate_difference_for_n_days( 100000, 0.0001, 0.00011, 30)
+    streak, sequence = count_sequences( 3, data)
+    streaks.append( streak)
+    sequences.append( sequence)
+print( sum(streaks)/sum(sequences))</code></pre>
+<p>So, roughly, there’s a 5.0% chance of seeing at least one streak of 3 days in a single city over a 30 day period even if the treatment is better.</p>
+<p>But is this what we really want to know? There are 20 cities…we want to know the probability of observing such a streak in at least one of the <em>20</em> cities…so the event space is “streak-in-a-city”.</p>
+<pre><code>def streak_in_a_city( cities, population, control_rate, treatment_rate, streak_length):
+    results = []
+    for i in range( cities):
+        data = simulate_difference_for_n_days(population, control_rate,
+                                              treatment_rate, 30)
+        streak, sequence = count_sequences( streak_length, data)
+        result = 1.0 if streak &gt; 0 else 0.0
+        results.append( result)
+    return sum(results), cities</code></pre>
+<pre><code>streaks, cities = streak_in_a_city( 20, 100000, 0.0001, 0.00011, 3)
+print( streaks, cities, streaks/cities)</code></pre>
+<pre><code>streaks = []
+experiments = []
+for i in range( 100):
+    streak, cities = streak_in_a_city( 20, 100000, 0.0001, 0.00011, 3)
+    streaks.append( streak)
+    experiments.append( cities)
+print( sum( streaks)/sum(experiments))</code></pre>
+<p>As we can see, we expect to see a losing streak of 3 in <em>some</em> city even if the treatment is definitely better than control about 67.7% of the time.</p>
+<p>Here’s an interesting observation. Once we had the probability of 5.0% for a streak of losses in a city, did we need to do a simulation for 20 cities? The answer is, no.</p>
+<p>If we let a losing streak be “tails” then the question we’re asking about our new model and cities is, if the probability of tails is 5%, and we flip 20 coins simultaneously, what is the probability that we’ll see at least one tail? The “at least one” part is what makes it harder. However, if we reframe the question as, what is the probability of seeing 20 heads when tossing 20 coins if the probability of heads is 95%, then we have a draw from a Binomial distribution:</p>
+<pre><code>from scipy.stats import binom</code></pre>
+<pre><code>binom.pmf(20, 20, 0.95)</code></pre>
+<p>If this is the probability of all heads, then we can use the Axioms of Probability to find out the probability of 1 tail or 2 tails or 3 tails, etc, which is “at least one tail”. Since the probability of all outcomes is one, and we have the probability of the single outcome we <em>don’t</em> want, we can simply subtract it from 1 to get the probability of the outcomes we <em>do</em> want. And if we take 1 - 0.36, we get 0.64, the probability of “at least one tail”. The result is close to what we simulated. You should always be on the lookout for such shortcuts.</p>
+<p>Now try solving the problem yourself with different assumptions about what constitutes a streak or even what the true difference between the new model (treatment) and control is (the lift…which can be negative and still be called “lift”).</p>
+</div>
+</div>
+<div id="conclusion" class="section level2" number="4.10">
+<h2><span class="header-section-number">4.10</span> Conclusion</h2>
+<p>We covered a lot of ground in this chapter from the basic ideas of probability to fallacies in probabilistic reasoning. Still, probability is a fundamental tool in data science. Returning to our definition of data science, it says:</p>
+<blockquote>
+<p>Data science is the application of math and computers to solve problems that stem from a lack of knowledge, constrained by the small number of people with any interest in the answers.</p>
+</blockquote>
+<p>The fundamental problem of Science is extrapolating general conclusions from specific data sets. That is, inference. Probability is our fundamental tool for dealing with the problem of inference because it allows us to model our uncertainty in a very rigorous way. Still…it’s not a panacea. It does not magically make inference deductive instead of inductive.</p>
+<p>Although the types, rules and laws of probability are important, the most important part of this chapter is Bayes Rule (or Theorem). Bayes Rule allows us tells us how to update our beliefs based on evidence and forms the basis for Statistical Inference discussed in this book.</p>
+<p>#S## Review</p>
+<p><em>When asked to give an example, do not use dice, coins or cards (or any gambling device).</em></p>
+<ol style="list-style-type: decimal">
+<li>Why is a coin flip deterministic but we still need probability to model it?</li>
+<li>What is our working definition of probability?</li>
+<li>If <span class="math inline">\(A = {a_1, a_2, a_3}\)</span> and <span class="math inline">\(B = {b_1, b_2}\)</span>, then answer the following questions:
+<ol style="list-style-type: decimal">
+<li>What does <span class="math inline">\(P(A, B)\)</span> denote?</li>
+<li>What does <span class="math inline">\(P(A)\)</span> denote? How did we arrive at it from <span class="math inline">\(P(A, B)\)</span>?</li>
+<li>What does <span class="math inline">\(P(A=a_1\)</span>) denote?</li>
+<li>What does <span class="math inline">\(P(a_1)\)</span> denote? Why should we be careful when using a “shorthand”?</li>
+<li>What does <span class="math inline">\(P(A|B)\)</span> denote? How many probability distributions does it represent?</li>
+<li>What does <span class="math inline">\(P(A|B)P(B)\)</span> denote? Write it out.</li>
+<li>Express <span class="math inline">\(P(A)\)</span> using the Total Probability.</li>
+</ol></li>
+<li>What is the difference between an <strong>outcome</strong> and an <strong>event</strong>? Give an example not shown elsewhere.</li>
+<li>Give an example of the <strong>independence</strong> of two outcomes.</li>
+<li>Give an example of <strong>conditional independence</strong> of three outcomes.</li>
+<li>What is the <strong>Gambler’s Fallacy</strong>?</li>
+<li>What is the <strong>Inverse Probability Fallacy</strong>?</li>
+<li>What is the <strong>Prosecutor’s Fallacy</strong>?</li>
+<li>Joe has been randomly selected for drug testing from a population that has about 3% heroin use. Joe tests positive for heroin use (<span class="math inline">\(u\)</span>). The test used correctly identifies users 95% of the time <span class="math inline">\(P(+|u) = 0.95\)</span> and correctly identifies non-users 90% of the time <span class="math inline">\(P(-|c) = 0.90\)</span> (<span class="math inline">\(c\)</span> for “clean”). What is the probability that Joe is using heroin <span class="math inline">\(P(u|+)\)</span>? What are the increment and total evidences in this problem?</li>
+</ol>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="systems.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="final-words.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["fundamentals-r-edition.pdf", "fundamentals-r-edition.epub"],
+"toc": {
+"collapse": "chapter"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

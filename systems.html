@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Systems Theory | Fundamentals of Data Science (R Edition)</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Systems Theory | Fundamentals of Data Science (R Edition)" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Systems Theory | Fundamentals of Data Science (R Edition)" />
+  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  
+
+<meta name="author" content="Andrew Stewart" />
+<meta name="author" content="Stephyn Butcher" />
+
+
+<meta name="date" content="2020-08-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="process.html"/>
+<link rel="next" href="probability.html"/>
+<script src="libs/header-attrs-2.3/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#business-statistics"><i class="fa fa-check"></i><b>1.1</b> Business Statistics</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#defining-data-science"><i class="fa fa-check"></i><b>1.2</b> Defining Data Science</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="introduction.html"><a href="introduction.html#venn-diagram-of-data-science"><i class="fa fa-check"></i><b>1.2.1</b> Venn Diagram of Data Science</a></li>
+</ul></li>
+<li class="chapter" data-level="1.3" data-path="introduction.html"><a href="introduction.html#data-science-is-science"><i class="fa fa-check"></i><b>1.3</b> Data Science is Science</a></li>
+<li class="chapter" data-level="1.4" data-path="introduction.html"><a href="introduction.html#big-data"><i class="fa fa-check"></i><b>1.4</b> Big Data</a></li>
+<li class="chapter" data-level="1.5" data-path="introduction.html"><a href="introduction.html#data-science-case-studies"><i class="fa fa-check"></i><b>1.5</b> Data Science Case Studies</a>
+<ul>
+<li class="chapter" data-level="1.5.1" data-path="introduction.html"><a href="introduction.html#signet-bank"><i class="fa fa-check"></i><b>1.5.1</b> Signet Bank</a></li>
+<li class="chapter" data-level="1.5.2" data-path="introduction.html"><a href="introduction.html#target"><i class="fa fa-check"></i><b>1.5.2</b> Target</a></li>
+<li class="chapter" data-level="1.5.3" data-path="introduction.html"><a href="introduction.html#walmart"><i class="fa fa-check"></i><b>1.5.3</b> Walmart</a></li>
+<li class="chapter" data-level="1.5.4" data-path="introduction.html"><a href="introduction.html#obama-campaign"><i class="fa fa-check"></i><b>1.5.4</b> Obama Campaign</a></li>
+<li class="chapter" data-level="1.5.5" data-path="introduction.html"><a href="introduction.html#identifying-place"><i class="fa fa-check"></i><b>1.5.5</b> Identifying Place</a></li>
+<li class="chapter" data-level="1.5.6" data-path="introduction.html"><a href="introduction.html#pruning-trees-in-nyc"><i class="fa fa-check"></i><b>1.5.6</b> Pruning Trees in NYC</a></li>
+<li class="chapter" data-level="1.5.7" data-path="introduction.html"><a href="introduction.html#the-information-architecture-of-medicine-is-broken"><i class="fa fa-check"></i><b>1.5.7</b> The Information Architecture of Medicine is Broken</a></li>
+<li class="chapter" data-level="1.5.8" data-path="introduction.html"><a href="introduction.html#love-in-the-time-of-data"><i class="fa fa-check"></i><b>1.5.8</b> Love in the Time of Data</a></li>
+<li class="chapter" data-level="1.5.9" data-path="introduction.html"><a href="introduction.html#boozallenhamilton-data-science"><i class="fa fa-check"></i><b>1.5.9</b> Booz/Allen/Hamilton Data Science</a></li>
+</ul></li>
+<li class="chapter" data-level="1.6" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>1.6</b> Conclusion</a></li>
+<li class="chapter" data-level="1.7" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>1.7</b> Review</a></li>
+<li class="chapter" data-level="1.8" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>1.8</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="process.html"><a href="process.html"><i class="fa fa-check"></i><b>2</b> Data Science Process</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="process.html"><a href="process.html#the-process"><i class="fa fa-check"></i><b>2.1</b> The Process</a></li>
+<li class="chapter" data-level="2.2" data-path="process.html"><a href="process.html#side-note-on-data"><i class="fa fa-check"></i><b>2.2</b> Side Note on Data</a></li>
+<li class="chapter" data-level="2.3" data-path="process.html"><a href="process.html#stages-of-data-science"><i class="fa fa-check"></i><b>2.3</b> Stages of Data Science</a></li>
+<li class="chapter" data-level="2.4" data-path="process.html"><a href="process.html#agile-data-science-pyramid"><i class="fa fa-check"></i><b>2.4</b> Agile Data Science Pyramid</a></li>
+<li class="chapter" data-level="2.5" data-path="process.html"><a href="process.html#ask"><i class="fa fa-check"></i><b>2.5</b> ASK</a></li>
+<li class="chapter" data-level="2.6" data-path="process.html"><a href="process.html#convo"><i class="fa fa-check"></i><b>2.6</b> CoNVO</a></li>
+<li class="chapter" data-level="2.7" data-path="process.html"><a href="process.html#convo-examples"><i class="fa fa-check"></i><b>2.7</b> CoNVO Examples</a>
+<ul>
+<li class="chapter" data-level="2.7.1" data-path="process.html"><a href="process.html#refugee-non-profit"><i class="fa fa-check"></i><b>2.7.1</b> Refugee Non-Profit</a></li>
+<li class="chapter" data-level="2.7.2" data-path="process.html"><a href="process.html#marketing-department"><i class="fa fa-check"></i><b>2.7.2</b> Marketing Department</a></li>
+<li class="chapter" data-level="2.7.3" data-path="process.html"><a href="process.html#media-organization"><i class="fa fa-check"></i><b>2.7.3</b> Media Organization</a></li>
+<li class="chapter" data-level="2.7.4" data-path="process.html"><a href="process.html#advocacy-group"><i class="fa fa-check"></i><b>2.7.4</b> Advocacy Group</a></li>
+</ul></li>
+<li class="chapter" data-level="2.8" data-path="process.html"><a href="process.html#resistance"><i class="fa fa-check"></i><b>2.8</b> Resistance</a></li>
+<li class="chapter" data-level="2.9" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>2.9</b> Conclusion</a></li>
+<li class="chapter" data-level="2.10" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>2.10</b> Review</a></li>
+<li class="chapter" data-level="2.11" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>2.11</b> Exercises</a></li>
+<li class="chapter" data-level="2.12" data-path="process.html"><a href="process.html#additional-resources"><i class="fa fa-check"></i><b>2.12</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="systems.html"><a href="systems.html"><i class="fa fa-check"></i><b>3</b> Systems Theory</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="systems.html"><a href="systems.html#system-dynamics"><i class="fa fa-check"></i><b>3.1</b> System Dynamics</a></li>
+<li class="chapter" data-level="3.2" data-path="systems.html"><a href="systems.html#what-is-a-system"><i class="fa fa-check"></i><b>3.2</b> What is a System?</a></li>
+<li class="chapter" data-level="3.3" data-path="systems.html"><a href="systems.html#causal-loop-diagram"><i class="fa fa-check"></i><b>3.3</b> Causal Loop Diagram</a></li>
+<li class="chapter" data-level="3.4" data-path="systems.html"><a href="systems.html#heroin-model"><i class="fa fa-check"></i><b>3.4</b> Heroin Model</a></li>
+<li class="chapter" data-level="3.5" data-path="systems.html"><a href="systems.html#email-model"><i class="fa fa-check"></i><b>3.5</b> Email Model</a></li>
+<li class="chapter" data-level="3.6" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>3.6</b> Conclusion</a></li>
+<li class="chapter" data-level="3.7" data-path="introduction.html"><a href="introduction.html#review"><i class="fa fa-check"></i><b>3.7</b> Review</a></li>
+<li class="chapter" data-level="3.8" data-path="introduction.html"><a href="introduction.html#exercises"><i class="fa fa-check"></i><b>3.8</b> Exercises</a></li>
+<li class="chapter" data-level="3.9" data-path="process.html"><a href="process.html#additional-resources"><i class="fa fa-check"></i><b>3.9</b> Additional Resources</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="probability.html"><a href="probability.html"><i class="fa fa-check"></i><b>4</b> Probability</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="probability.html"><a href="probability.html#from-systems-thinking-to-probability"><i class="fa fa-check"></i><b>4.1</b> From Systems Thinking to Probability</a></li>
+<li class="chapter" data-level="4.2" data-path="probability.html"><a href="probability.html#definition-of-probability"><i class="fa fa-check"></i><b>4.2</b> Definition of Probability</a></li>
+<li class="chapter" data-level="4.3" data-path="probability.html"><a href="probability.html#axioms-of-probability"><i class="fa fa-check"></i><b>4.3</b> Axioms of Probability</a>
+<ul>
+<li class="chapter" data-level="4.3.1" data-path="probability.html"><a href="probability.html#notation"><i class="fa fa-check"></i><b>4.3.1</b> Notation</a></li>
+</ul></li>
+<li class="chapter" data-level="4.4" data-path="probability.html"><a href="probability.html#types-of-probability"><i class="fa fa-check"></i><b>4.4</b> Types of Probability</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="probability.html"><a href="probability.html#joint-probability"><i class="fa fa-check"></i><b>4.4.1</b> Joint Probability</a></li>
+<li class="chapter" data-level="4.4.2" data-path="probability.html"><a href="probability.html#conditional-probability"><i class="fa fa-check"></i><b>4.4.2</b> Conditional Probability</a></li>
+<li class="chapter" data-level="4.4.3" data-path="probability.html"><a href="probability.html#marginal-or-prior-probability"><i class="fa fa-check"></i><b>4.4.3</b> Marginal or Prior Probability</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="probability.html"><a href="probability.html#rules-of-probability"><i class="fa fa-check"></i><b>4.5</b> Rules of Probability</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="probability.html"><a href="probability.html#monotonicity"><i class="fa fa-check"></i><b>4.5.1</b> Monotonicity</a></li>
+<li class="chapter" data-level="4.5.2" data-path="probability.html"><a href="probability.html#negation"><i class="fa fa-check"></i><b>4.5.2</b> Negation</a></li>
+<li class="chapter" data-level="4.5.3" data-path="probability.html"><a href="probability.html#total-probability"><i class="fa fa-check"></i><b>4.5.3</b> Total Probability</a></li>
+<li class="chapter" data-level="4.5.4" data-path="probability.html"><a href="probability.html#chain-rule"><i class="fa fa-check"></i><b>4.5.4</b> Chain Rule</a></li>
+<li class="chapter" data-level="4.5.5" data-path="probability.html"><a href="probability.html#bayes-rule"><i class="fa fa-check"></i><b>4.5.5</b> Bayes Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="probability.html"><a href="probability.html#independence-and-conditional-independence"><i class="fa fa-check"></i><b>4.6</b> Independence and Conditional Independence</a></li>
+<li class="chapter" data-level="4.7" data-path="probability.html"><a href="probability.html#probabilistic-fallacies"><i class="fa fa-check"></i><b>4.7</b> Probabilistic Fallacies</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="probability.html"><a href="probability.html#conjunction-fallacy"><i class="fa fa-check"></i><b>4.7.1</b> Conjunction Fallacy</a></li>
+<li class="chapter" data-level="4.7.2" data-path="probability.html"><a href="probability.html#gamblers-fallacy-and-hot-streak-fallacy"><i class="fa fa-check"></i><b>4.7.2</b> Gambler’s Fallacy and Hot-Streak Fallacy</a></li>
+<li class="chapter" data-level="4.7.3" data-path="probability.html"><a href="probability.html#inverse-probability-fallacy"><i class="fa fa-check"></i><b>4.7.3</b> Inverse Probability Fallacy</a></li>
+<li class="chapter" data-level="4.7.4" data-path="probability.html"><a href="probability.html#base-rate-fallacy"><i class="fa fa-check"></i><b>4.7.4</b> Base Rate Fallacy</a></li>
+<li class="chapter" data-level="4.7.5" data-path="probability.html"><a href="probability.html#prosecutors-fallacy"><i class="fa fa-check"></i><b>4.7.5</b> Prosecutor’s Fallacy</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="probability.html"><a href="probability.html#applications"><i class="fa fa-check"></i><b>4.8</b> Applications</a>
+<ul>
+<li class="chapter" data-level="4.8.1" data-path="probability.html"><a href="probability.html#applications-in-general-probability"><i class="fa fa-check"></i><b>4.8.1</b> Applications in General Probability</a></li>
+<li class="chapter" data-level="4.8.2" data-path="probability.html"><a href="probability.html#applications-of-bayes-rule"><i class="fa fa-check"></i><b>4.8.2</b> Applications of Bayes Rule</a></li>
+</ul></li>
+<li class="chapter" data-level="4.9" data-path="probability.html"><a href="probability.html#probability-and-simulation"><i class="fa fa-check"></i><b>4.9</b> Probability and Simulation</a>
+<ul>
+<li class="chapter" data-level="4.9.1" data-path="probability.html"><a href="probability.html#cities"><i class="fa fa-check"></i><b>4.9.1</b> Cities</a></li>
+<li class="chapter" data-level="4.9.2" data-path="probability.html"><a href="probability.html#what-do-we-know"><i class="fa fa-check"></i><b>4.9.2</b> What do we know?</a></li>
+</ul></li>
+<li class="chapter" data-level="4.10" data-path="introduction.html"><a href="introduction.html#conclusion"><i class="fa fa-check"></i><b>4.10</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="final-words.html"><a href="final-words.html"><i class="fa fa-check"></i><b>5</b> Final Words</a></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Fundamentals of Data Science (R Edition)</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="systems" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Systems Theory</h1>
+<p>In this chapter we discuss a bit of Systems Theory.
+Systems Theory?
+Systems Theory is basically an interdisciplinary field that seeks to understand the general properties of systems of interrelated parts and their interactions over time or “process”.</p>
+<p>In the 1970s and 80s, there was a huge interest in things holistic.
+In 1972, the Club of Rome’s <a href="https://en.wikipedia.org/wiki/The_Limits_to_Growth">Limits to Growth</a> was published, which used Jay Forrester’s stock-and-flow modeling technique called <a href="https://en.wikipedia.org/wiki/System_dynamics">System Dynamics</a>.
+In 1975, Fritjof Capra published <a href="https://en.wikipedia.org/wiki/The_Tao_of_Physics">The Tao of Physics</a>.
+By 1987, James Gleick had written <a href="https://en.wikipedia.org/wiki/Chaos:_Making_a_New_Science">Chaos: The Making of a New Science</a>, which focused on the non-linear dynamics of systems.
+What all of these works have in common is a desire to make sense of systems as a whole based on the behaviors of their interdependent parts.
+Chaos Theory emphasized the non-linear and often unpredictable nature of such systems.</p>
+<p><img src="resources/systems/karma.jpg" width="50%" style="display: block; margin: auto;" /></p>
+<p>Systems Theory can be informative for data science for a number of reasons:</p>
+<ol style="list-style-type: decimal">
+<li>Domain knowledge is an important aspect of data science. The data do not “speak for themselves”.</li>
+<li>Systems do exhibit general properties such as “increasing returns” or “decreasing returns” and it is important to be able to identify when the system you are working with is exhibiting one of these properties.</li>
+<li>The tools of Systems Thinking can be used to refine a collective understanding of Context and Vision (CoNVO).</li>
+</ol>
+<p>In this chapter we discuss Systems Theory, specifically, a qualitative modeling technique called “Causal Loop Diagrams” that originated with System Dynamics.
+We focus on the Causal Loop Diagram (CLD) because:</p>
+<ol style="list-style-type: decimal">
+<li>A Causal Loop Diagram enables you to extract domain knowledge from stakeholders and interested parties (Context).</li>
+<li>All data comes from some real world process. A Causal Loop Diagram is a qualitative way of making your thinking about that process concrete (Context).</li>
+<li>A Causal Loop Diagram then helps you develop suitable quantitative models (Need).</li>
+</ol>
+<p>In my experience, the first weeks and sometimes months of a new job or orienting a new team member involves figuring out the domain vocabulary, data locations and availability as well as basic goals of the organization.
+In other words, you acquire domain knowledge.</p>
+<p>Now, while I cannot teach you the domain knowledge you need for your particular job, it turns out there are some well understood principles that all domains more or less follow.
+I find there are some <em>general</em> techniques for thinking about problems that fit very well with Data Science and are worth knowing.
+Once such technique is <em>Systems Theory</em> or, more specifically, <em>Systems Dynamics</em>.
+Systems Dynamics covers a wide range of modeling techniques.
+I am going to go over only one and I’m not even going to suggest that you follow it <em>exactly</em>.</p>
+<p>The main goal is to make your thinking about the domain concrete and be able to share it with others.
+This is really helpful for rooting out stakeholders with differing mental models of what’s happening or what needs to be done.
+Otherwise, there is a tendency for everyone to believe that they’re talking about the same thing or leave everything at vague generalities.</p>
+<p>But probably most importantly for us, it turns out this technique is a good basis for talking about what our data is and where it comes from (the data generating process) and ultimately what your models are about (and, in some cases, how they might affect the real world).</p>
+<div id="system-dynamics" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> System Dynamics</h2>
+<p>It turns out that we, <em>homo sapiens sapiens</em>, aren’t particularly good at understanding relationships involving more than a handful of variables with more than one or two degrees of separation.
+We get simple cause and effect but when we start adding more variables and feedback loops, we get lost quickly.</p>
+<p><a href="https://en.wikipedia.org/wiki/System_dynamics">System Dynamics</a> was originally developed by Jay Forrester as a technique to help managers better understand the system they were managing.
+The basic approach is to identify key variables of the system and their influences on each other and model them with a set of differential equations.
+More specifically we look at <em>levels</em> (population, industrial capacity, atmospheric carbon) and <em>flows</em> (births, deaths, new products, output).
+Given the parameterization of the model, the point is not to see if Gross Domestic Product is estimated to be $500 trillion or $600 trillion next year.
+The point is to see the <em>pattern</em> in the behavior of GDP, whether it goes up or down or whether it oscillates.
+The relative values of the parameters can often produce widely different outcomes, even for the same model structure.
+And this is the interesting thing about System Dynamics.
+It basically says something like, “I don’t care if you’re talking about an economy or a cell in the body or a corporation. There are general systematic patterns at work when two flows are working against each other.”.
+Today, there are software packages available to develop these models graphically and then simulate them.</p>
+<p>The first use of System Dynamics (all computations by hand!) was probably Forrester’s consulting work with GM to explain a 3 year cycle in employment at a Kentucky GM plant.
+The most famous application of System Dynamics was the Club of Rome’s <a href="https://en.wikipedia.org/wiki/The_Limits_to_Growth">Limits to Growth</a> report published in 1972.
+Limits to Growth criticized when it first came out but the general path of the predictions for “business as usual” appear to be on track.
+Unfortunately, this particular scenario predicts <a href="https://www.theguardian.com/commentisfree/2014/sep/02/limits-to-growth-was-right-new-research-shows-were-nearing-collapse">economic collapse</a> around 2050 (give or take).
+<a href="http://mitsloan.mit.edu/group/system-dynamics/">Systems Dynamics</a> course is still taught at MIT by Forrester’s students and their students.</p>
+<p>There’s a lot more to System Dynamics than than what we’ll discuss here.
+For example, there are <em>archetypal</em> patterns in complex systems.
+Additionally, Donella Meadows identified <a href="https://en.wikipedia.org/wiki/Twelve_leverage_points">12 leverage points</a> in a system.
+My personal view is that System Dynamics contains many of the most useful insights of economics (for example, decreasing returns) and more.</p>
+<p>While Stock and Flow Models are interesting, the more qualitative aspects of Systems Dynamics are sufficient for what we want to accomplish: flesh out the relationships between the variables in our systems and create a shared understanding.
+For example, if you’re trying to investigate one of the Kaggle data science use cases, say, training recommendations in an HR context or monitoring contractor performance in construction, then we want to be able to quickly sketch out the main relationships of this system in order to develop the context, need and vision (CoNVO).</p>
+<p>For this purpose, I think that System Dynamics’ Causal Loop Diagrams (CLD) are a useful tool.
+They can be used during the early stages of context and need identification with domain and subject matter experts, stakeholders, and other analysts.
+They can improve communication, by establishing a shared mental model of the system being evaluated or manipulated, and bring to light unknown factors and hidden assumptions.
+And, perhaps more importantly, they can be used even if it’s just you.
+As we will see later, understanding the system is imperative to all steps in the data science process.
+CLDs can help in a number of ways:</p>
+<ol style="list-style-type: decimal">
+<li>It represents a shared understanding of the domain knowledge.</li>
+<li>It represents a mental or qualitative model of where the data is coming from.</li>
+<li>It represents parts of the system that may have been “assumed away” or “simplified”.</li>
+<li>It represents a broader context for evaluating the success or failure of a data science solution.</li>
+</ol>
+<p>First, it’s one thing for people to say “sending more email creates more sales” and another thing to start actually specify a system where that’s true.
+CLDs give you a notation for describing a system and its parts as well as the influences of each part.
+It also provides a broader context for data-based story telling.</p>
+<p>Second, data is not just columns of numbers and symbols.
+Data is generated as observations (direct or indirect) of a system in motion, a process.
+Taking the time to actually specify the system that is generating the data will help you understand the data better.</p>
+<p>Third, when we build statistical or machine learning models, we often do not have all the information we would like (either because we didn’t get it or we can’t get it) or because we chose not to include it.
+With a CLD, we have a baseline of comparison for what we did not, could not, or would not include.
+At the data collection stage, this can be a warning to us that something doesn’t seem right (“why are there values for this variable above 10?”) or at the modeling stage, that something may be wrong or unexpected (“we thought this relationship would be positive and the coefficient is negative. We need to check the data.”).</p>
+<p>Fourth, and this relates to the second, it may turn out that an email campaign that tested well, flops utterly when scaled.
+Why?
+We often assume the world is unchanging or <em>stationary</em> when it is not.
+Perhaps a competitor got wind of the email campaign and launched their own advertising blitz that neutralized it.</p>
+<p>Finally, when talking about systems it’s convenient to have a notation for describing the system and that’s where Causal Loop Diagrams come in.</p>
+<p>But first let’s start at the beginning.
+What is a system?</p>
+</div>
+<div id="what-is-a-system" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> What is a System?</h2>
+<p>What is a <a href="https://en.wikipedia.org/wiki/System">System</a>?
+Good question.
+At this point we simply defer to Wikipedia:</p>
+<blockquote>
+<p>Some systems share common characteristics, including:</p>
+</blockquote>
+<blockquote>
+<ul>
+<li>A system has structure, it contains parts (or components) that are directly or indirectly related to each other;</li>
+<li>A system has behavior, it exhibits processes that fulfill its function
+or purpose;</li>
+<li>A system has interconnectivity: the parts and processes are connected by structural and/or behavioral relationships;</li>
+<li>A system’s structure and behavior may be decomposed via subsystems and sub-processes to elementary parts and process steps;</li>
+<li>A system has behavior that, in relativity to its
+surroundings, may be categorized as both fast and strong.</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>The term system may also refer to a set of rules that governs structure and/or behavior. Alternatively, and usually in the context of complex social systems, the term institution is used to describe the set of rules that govern structure and/or behavior.</p>
+</blockquote>
+<p>Systems are often part of larger systems (and systems often have smaller parts that are themselves systems).
+A cell is a system.
+The digestion of food is handled by a system (even though it includes cells).
+A person is a system (even though it has a digestive system).
+A family is a system (even though it includes persons).
+And so on.
+As Carl Sagan said, “if you want to bake an apple pie from scratch, you must first create the universe.”</p>
+<p>Where you draw the line depends on what level of behavior you’re interested in (we’ll have a bit more to say about this later).
+I recommend going out one or two layers just beyond the immediate interest or control.
+If you stop at what you’re interested in or what you can directly control, you may well leave out important parts of the system and their interactions.
+Going slightly “bigger” or “wider” also helps you be more certain that your simplifications are either warranted or document exactly what was assumed away.</p>
+</div>
+<div id="causal-loop-diagram" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Causal Loop Diagram</h2>
+<p>A Causal Loop Diagram is, at its most basic, a directed graph.
+Unlike such constructs such as Bayesian Networks, a CLD <em>may</em> have cycles.
+In fact, the presence of cycles is what makes System Dynamics unique.</p>
+<p>Variables are indicated by nodes or vertices as in the first graph of Figure <a href="systems.html#fig:systems-fig1">3.1</a>.
+In Figure 1, both A and B are variables.
+In the next graph, we see that A influences B.
+Arcs indicate influence between two variables with the arrow indicating the direction of influence.
+All arcs have a <em>polarity</em> notation near the arrowhead indicating “positive” (+) or “negative” (-) polarity.</p>
+<p>Polarity is established by mentally walking through the (causal) influence of A on B.
+When A increases, what happens to B?
+If B also increases, then the polarity is positive.
+It’s very easy to misread a CLD and believe that the plus sign (+) indicates “increase”, that B increases no matter what happens to A.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig1"></span>
+<img src="resources/systems/cld01.png" alt="Two Variables with Positive Polarity" width="35%" />
+<p class="caption">
+Figure 3.1: Two Variables with Positive Polarity
+</p>
+</div>
+<p>Looking at Figure <a href="systems.html#fig:systems-fig2">3.2</a>, we see what happens when A decreases, B also decreases.
+Positive polarity indicates that two variables move in the same direction.
+Actually, in the “old days”, polarity was indicated by “S” (for same) and “O” (for opposite).</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig2"></span>
+<img src="resources/systems/cld02.png" alt="Positive Polarity Works Both Ways" width="35%" />
+<p class="caption">
+Figure 3.2: Positive Polarity Works Both Ways
+</p>
+</div>
+<p>In Figure <a href="systems.html#fig:systems-fig3">3.3</a>, we establish that a different relationship between A and B.
+if A increases, B decreases.
+This is the negative polarity as indicated by the negative sign near the arrowhead.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig3"></span>
+<img src="resources/systems/cld03.png" alt="Negative Polarity Indicates an Opposite Reaction" width="35%" />
+<p class="caption">
+Figure 3.3: Negative Polarity Indicates an Opposite Reaction
+</p>
+</div>
+<p>In Figure <a href="systems.html#fig:systems-fig4">3.4</a> we can see that A can influence B and, simultaneously, B can influence A.
+Such cycles–called <em>feedback loops</em>–are an important part of System Dynamics.
+The (+) in the middle indicates that this is a <em>reinforcing</em> feedback loop (which we will also indicate with (R)).
+In such a feedback loop, the interactions of the variables reinforce each other: A increases which causes B to increase which causes A to increase and so on.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig4"></span>
+<img src="resources/systems/cld04.png" alt="Population Model" width="35%" />
+<p class="caption">
+Figure 3.4: Population Model
+</p>
+</div>
+<p>If there are arcs in the feedback loop with negative polarities, then we may have a <em>balancing</em> feedback loop (- or B) as in Figure <a href="systems.html#fig:systems-fig5">3.5</a>.
+This is fairly easy to figure out with only two arcs in the loop, but how does it work with many arcs?
+The rule of thumb is that if there are an <em>odd</em> number of negative arcs in the loop, then the feedback loop is balancing; otherwise, it is reinforcing.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig5"></span>
+<img src="resources/systems/cld05.png" alt="Balancing Feedback Loop" width="35%" />
+<p class="caption">
+Figure 3.5: Balancing Feedback Loop
+</p>
+</div>
+<p>Let’s see a simple example of CLD modeling using subject matter with which everyone is familiar: life and death.
+In Figure 6, we see a simple population model with three variables: births, populations, and deaths.
+There is a positive arc from births to population because when births increase, population increases.
+There is a positive arc from population to births because when population increases, births increases.
+However, they do not increase right away but with a delay.
+This delay is indicated by the two strikes on the arc, “||”.
+Because there are no negative arcs (an “even” number), this is a reinforcing feedback loop as highlighted in the 2nd graph of Figure 6.</p>
+<p>Similarly, as population increases, deaths increase and so that arc has a positive polarity.
+Because members of the population do not die instantly, there is a delay on the arc.
+However, as deaths increase, population decreases and so <em>that</em> arc is negative.
+Because there is one odd negative arc, this is a balancing feedback loop (3rd graph of Figure 6).</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig6"></span>
+<img src="resources/systems/cld06.png" alt="Simple Population Model" width="35%" />
+<p class="caption">
+Figure 3.6: Simple Population Model
+</p>
+</div>
+<p>Although this is only a simple model, we can see a few interesting things.
+First, population itself is kept in check by the relative strengths of the two feedback loops.
+Second, from a modeling perspective, there are a number of parameters that are exogenous to the system: puberty, birth rates, lifespans, and death rates.</p>
+<p>However, we can endogenize a number of these variables by including them as factors in our diagrams.
+In Figure <a href="systems.html#fig:systems-fig7">3.7</a>, we add at least one perspective on birth rates.
+Starting with population, when population increases, resources per person decrease (negative polarity).
+When resources per person increase, life expectancy increases (positive polarity).
+When life expectancy increases, the desired family size decreases (negative polarity).
+When desired family size increases, births per person increase (positive polarity).</p>
+<p>It is very important to look at <em>pairwise</em> relationships.
+At this point, we’re not following the causal chain yet.
+There is a natural tendency to want to “run” the model while you build it.
+For example, we could have taken the “desired family size decreases” and applied it to “births per person” but we would have almost certainly confused ourselves.
+It’s easiest to simply take each relationship in isolation and start, “When this variable increases, what does that variable do?”.</p>
+<p>When births per person increases, then births increase (positive polarity).
+Finally, when births increase, the population increases (positive polarity).
+Because we have two negative polarity arcs in the loop, this is a reinforcing feedback loop.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig7"></span>
+<img src="resources/systems/cld07.png" alt="Endogenized Birth Rate" width="50%" />
+<p class="caption">
+Figure 3.7: Endogenized Birth Rate
+</p>
+</div>
+<p>Now, let’s mentally simulate the model.
+When population increases, resources per person decrease.
+This causes life expectancies to decrease.
+As life expectancies decrease, desired family sizes increase.
+As desired family sizes increase, there are more births per person.
+As births per person increase, overall births increase.
+This increases population (which decreases resources per person…).</p>
+<p>In this way, we have endogenized birth rates (although not puberty).</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig8"></span>
+<img src="resources/systems/cld08.png" alt="Simulating the Expanded Birth Cycle" width="50%" />
+<p class="caption">
+Figure 3.8: Simulating the Expanded Birth Cycle
+</p>
+</div>
+<p>Next we look at death rates in Figure <a href="systems.html#fig:systems-fig9">3.9</a>.
+This is a lot simpler.
+As life expectancy increases, deaths decrease (negative polarity).
+With three negative polarity arcs, the entire loop is a balancing feedback loop.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig9"></span>
+<img src="resources/systems/cld09.png" alt="Endogenized Death Rate" width="50%" />
+<p class="caption">
+Figure 3.9: Endogenized Death Rate
+</p>
+</div>
+<p>Finally, you can follow the entire cycle in Figure <a href="systems.html#fig:systems-fig10">3.10</a>.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig10"></span>
+<img src="resources/systems/cld10.png" alt="Simulating the Expanded Death Cycle" width="50%" />
+<p class="caption">
+Figure 3.10: Simulating the Expanded Death Cycle
+</p>
+</div>
+<p>Note how we started simple and then expanded the model by endogenizing the birth rate and the death rate.
+Starting simple is a good way to track your progress.
+Also note that the characteristics of the feedback loops did not change.
+If, after you expand a model, the feedback loop flips from reinforcing to balancing (or vice versa), you should re-evaluate what you’ve done: was the initial model wrong because it left out details or is there something wrong with the new model.
+In general, however, this is typically how you’ll proceed.</p>
+<p>As a model is developed, what was an exogenous parameter can become an endogenous variable.
+You should not get bogged down in the process, however.
+This is only a tool.
+My suggestion is that if you are starting with the problem (either alone or on a team), start creating a causal loop diagram so that you can all clarify your mental model of the problem, the needs, vision and outcome.</p>
+<p>If you are starting with the data, go back and try to build the CLD that gives rise to the data you have even if it means adding variables that you <em>do not</em> have have data for.
+This will clarify your thinking about the data you have and the relationships you expect to see.</p>
+<p>I should also note that proper CLDs only have <em>numerical</em> variables or features.
+You will not generally see a variable labeled “gender” or “political party”.
+For example, men and women have different life expectancies.
+I think it’s fine to include these <em>categorical</em> variables in a Causal Loop Diagram either as variables or parameter.
+However, if you can think of a numeric representation of the variable, “social conservatism” instead of political party, you should use it if that is what you really mean (it’s possible that “political party” would then be a <em>proxy</em> for social conservatism in your actual model).</p>
+<p>Another approach is to change a categorical variable into a multiple binary variables.
+Here we could change political party to Democrat and think of the variable as a switch.
+If we switch it on, what happens to the other variable?
+If another variable increases, does the Democrat variable get switched on or off?
+The solutions are imperfect but it can be made to work.</p>
+<p>Let’s walk through a few more examples in order to get feel for the approach.
+First, let’s take a look at the famous “Heroin Model” and see why CLD can be very important for Data Science.</p>
+</div>
+<div id="heroin-model" class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Heroin Model</h2>
+<p>This is a fairly famous application of System Dynamics to a public policy problem.
+It dates from the 1970s but is topical with the resurgence in heroin use as a result of the opioid crisis.
+There are a few things I’d quibble with both in the Original and Revised Models but let’s accept them for now.</p>
+<p>Figure 11 shows the original model for the heroin cycle in the Bay Area of California (I think it was Berkeley or Oakland).
+Let’s walk through the three main loops of the model starting with “heroin supply”, first looking at the pairwise relationships in the arcs between variables.
+When the heroin supply increases, crime increases (positive).
+When crime increases, police activity increases (positive).
+When police activity increases, heroin seizures increase (positive).
+When heroin seizures increase, the heroin supply <em>decreases</em> (negative).
+The entire loop is <em>balancing</em> because there is a single negative arc.</p>
+<p>The next loop also starts from heroin supply.
+As the heroin supply increases, the heroin trade increases (positive).
+As the heroin trade increases, police activity increases (positive).
+We’ve already seen the rest here.
+Because there is only one negative arc, the entire loop is balancing.</p>
+<p>Finally, the third loop also builds off the heroin supply.
+As the heroin supply increases, the number of dealers increases (positive).
+As the number of dealers increase, the number of addicts increases (positive).
+As the number of addicts increases, the heroin trade increases (positive).
+This third loop is also balancing because there’s only the single negative arc between seizures and heroin supply.</p>
+<p>Because all three loops are balancing, the entire system is self-correcting.
+In essence, if there is no heroin supply, there won’t be dealers, addicts, or crime.
+At the time, police activity was identified as a <em>leverage point</em> in the system because police activity could be changed independent of the rest of the system (through extra patrols, tougher enforcement, etc.) and it could directly affect seizures and thus the heroin supply.
+This became the policy.
+Both crime and the heroin trade increased, instead of decreasing.
+What went wrong?</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig11"></span>
+<img src="resources/systems/cld11.png" alt="Original Heroin Model" width="50%" />
+<p class="caption">
+Figure 3.11: Original Heroin Model
+</p>
+</div>
+<p>The main problem was a failure to identify a key variable of the system: the price of heroin.
+As Figure 12 shows, an increase in the supply of heroin decreases the price.
+But, more relevant to the problem, a decrease in the supply of heroin increases the price.
+And what does policy activity do?
+With the increase in price, the heroin trade increases (more dealers are attracted).
+It also directly influences criminal activity because the price per addict is higher.
+This leads to more burglaries and theft.
+The main failure here is to recognize how price and price elasticity would influence the market and trade for heroin.
+Increased police activity actually made things worse because all the loops are actually reinforcing loops.
+Police activity wasn’t the leverage point we thought it was.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig12"></span>
+<img src="resources/systems/cld12.png" alt="Revised Heroin Model" width="50%" />
+<p class="caption">
+Figure 3.12: Revised Heroin Model
+</p>
+</div>
+<p>Does this mean that System Thinking failed? No. The main lesson here is that you might and will get your model wrong but by having it written down, we can at least see what each other is thinking.</p>
+</div>
+<div id="email-model" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Email Model</h2>
+<p>This scenario is not so much about a failed model as a failure to model.
+At Company X, we made our living, more or less, by sending emails to our subscribers.
+Figure 13 shows the simplest possible model for this relationship.</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig13"></span>
+<img src="resources/systems/cld13.png" alt="Simplistic Email Model" width="35%" />
+<p class="caption">
+Figure 3.13: Simplistic Email Model
+</p>
+</div>
+<p>The problem with this model is that it is much too simple.
+If this is your mental model, you can use it to achieve any target revenue revenue you’d like by simply dividing the revenue target by revenue per email and sending that many emails.
+This model entirely ignores the process in which emails and subscribers exist and revenue arises.
+Would the stakeholders have noticed how simplistic their model was if we had written it down just like this?
+An interesting question.</p>
+<p>So how can we make the model more realistic.
+First, we recognize that we’re sending emails to a list of subscribers.
+Second, we recognize that whenever you apply an action to a fixed resource (the list of subscribers), you can experience constant, increasing, or decreasing returns.
+Here domain knowledge from the Marketing department says that we experience diminishing returns.
+Why?</p>
+<p>Figure 14 shows a more in-depth model of the email/purchase process.
+We start with subscribers.
+If we increase subscribers, we can increase the number of emails.
+If we increase the number of emails, the number of unsubs increases.
+An increase in unsubs will decrease the number of subscribers.
+This is an important feedback loop that was missing in the original model.</p>
+<p>We are also constrained by inventory.
+If we have one item in our inventory, we can’t very well send a single person 20 emails about it.
+An increase in inventory increases the number of emails we can send.</p>
+<p>An email isn’t a thing by itself.
+An email is sent at a specific time, with a subject line and content.
+All of these influence whether an email leads to a purchase or not.
+An increase in emails, increases the number of emails that are opened.
+An increase in the number of opens leads to an increase in clicks.
+An increase in clicks leads to an increase in purchases.</p>
+<p>Finally, we can influence some of these things using personalization.
+If personalization “increases” (gets better) then opens increase (because they have better subject lines) and clicks increase (because they have better content).
+With an increase in inventory, we get an increase in personalization (we have more things to choose from to show you).
+An increase in purchases permits us to personalize better.
+This concept is called “revealed preferences” (you tell us the kinds of things you like by buying them).</p>
+<div class="figure" style="text-align: center"><span id="fig:systems-fig14"></span>
+<img src="resources/systems/cld14.png" alt="Realistic Email Model" width="60%" />
+<p class="caption">
+Figure 3.14: Realistic Email Model
+</p>
+</div>
+<p>Now, what does this say about sending emails?
+If we use emails as a leverage point (if we just change–increase–the number of emails we send), then subscribers goes down.
+We also see that opens, clicks, and purchases go up but here we have the diminishing returns.
+The increase in purchases at the one end will eventually be offset by the loss of subscribers.</p>
+<p>This new model isn’t perfect.
+For example, I don’t believe it captures all aspects of diminishing returns.
+You can’t send someone 20 emails a day about the same five things.
+You probably can’t send 20 emails a day about five completely different things.
+It isn’t clear to me how to capture that.
+But at least the limitations are made clear in the discussion.</p>
+<p>Additionally, we can get new subscribers through marketing and buying email lists.
+The interesting challenge here is that there are probably diminishing returns with new subscribers as well.
+Given the typical adoption curve and your place on it, the most enthusiastic customers for your product have already joined.
+This means that if you are adding truly <em>new</em> customers, they are going to be late adopters and perhaps harder to convince to buy your products.</p>
+<p>Nevertheless, the model is a start.
+By modeling the different parts of the email/purchase process, we can start measuring them and monitoring the health of the system as well as improve it.
+It serves as a foundation for communication between Finance, Marketing, and Data Science.</p>
+</div>
+<div id="conclusion" class="section level2" number="3.6">
+<h2><span class="header-section-number">3.6</span> Conclusion</h2>
+<p>Data Science is using math and computers to solve a problem that stems from a lack of knowledge. We can frame the application of data science in terms of the context, need, vision and outcome (CoNVO).</p>
+<p>However, for any particular application of data science, we need to have domain knowledge.
+One way to frame that domain knowledge is in terms of understanding the system in which we are operating.
+If our CoNVO leads us to build a model of at-risk youth, we should understand the system in which this process is taking place.</p>
+<p>Systems Thinking is general approach to think about the processes as interrelated,
+changing parts.
+System Dynamics is a particular approach to Systems Thinking.
+Stock and Flow Diagrams and Causal Loop Diagrams are models that System Dynamics uses to talk about systems and their evolution.</p>
+<p>Causal Loop Diagrams are a very useful tool for framing all aspects of the data science process.</p>
+<ol style="list-style-type: decimal">
+<li>They allow the team and stakeholders to share their mental models of the process being studied or acted upon.</li>
+<li>They help us make sure we’re just simplifying and not being simplistic.</li>
+<li>They help identify data that we need or what we should model.</li>
+<li>They keep us honest about the degree to which we can really intervene in a particular system or how our interventions are likely to fail.</li>
+</ol>
+<p>One of the most famous examples the non-linearity of systems comes from the 1970s. In San Francisco (IIRR), the police started cracking down on heroin dealers with the hope of lowering drug abuse.
+Instead, burglaries and other petty crimes increased.
+Why?
+Cracking down on heroin dealers caused the price of heroin to increase.
+This increased price caused theft to rise because addicts needed more money to pay for the increased price of heroin.</p>
+<p>“hi-tech” modeling techniques like boosted random forests and deep learning do not excuse the data scientist from understanding the system they’re modeling or hoping to control.</p>
+</div>
+<div id="review" class="section level2" number="3.7">
+<h2><span class="header-section-number">3.7</span> Review</h2>
+<ol style="list-style-type: decimal">
+<li>Why is domain knowledge controversial in some data science circles?</li>
+<li>Why are <strong>Causal Loop Diagrams</strong> helpful for data science?</li>
+<li>How do Causal Loop Diagrams fit into our overall “CoNVO” model for describing successful data science projects?</li>
+<li>The main components of a Causal Loop Diagram are: <strong>variables</strong>, <strong>influence arrows</strong> and <strong>polarity arrows</strong>.
+<ol style="list-style-type: decimal">
+<li>If there is an arrow from variable A to variable B with a “+” sign at the arrow head, what does that mean?</li>
+<li>If there is an arrow from variable B to variable A with a “-” sign at the arrow head, what does that mean?</li>
+<li>Taken together, what kind of <strong>feedback loop</strong> does the above arrangement describe?</li>
+<li>If, instead, the arrow from variable B to variable A had a “+” annotation, what kind of feedback loop would that describe?</li>
+</ol></li>
+<li>What are the difficulties associated with <strong>categorical variables</strong> and Causal Loop Diagrams? What are some of the ways we can get around them?</li>
+</ol>
+</div>
+<div id="exercises" class="section level2" number="3.8">
+<h2><span class="header-section-number">3.8</span> Exercises</h2>
+<ol style="list-style-type: decimal">
+<li>Add the potential for getting new subscribers to the email model. How do you add the adoption curve to the model?</li>
+<li>Find a problem from work or that interests you and see if you can draw a Causal Loop Diagram for it. Share it with someone who has an opposing viewpoint. Share it with someone who has the same viewpoint. What assumptions do you have in common? Do you disagree on the polarity of any arcs? Is there “violent agreement” on anything?</li>
+</ol>
+</div>
+<div id="additional-resources" class="section level2" number="3.9">
+<h2><span class="header-section-number">3.9</span> Additional Resources</h2>
+<p><a href="https://www.theguardian.com/commentisfree/2014/sep/02/limits-to-growth-was-right-new-research-shows-were-nearing-collapse">Limits to Growth was Right: New research shows we’re nearing economic collapse</a> (news)</p>
+<p><a href="http://systemsandus.com/">Systems &amp; Us</a> (site)</p>
+<p><a href="https://www.youtube.com/watch?v=WDqVZ9VV4Kg">Overview of Causal Loop Diagrams</a> (video)</p>
+<p><a href="https://www.youtube.com/watch?v=EjC6xv9PT9Y">Brief Overview of Causal Loop Diagrams</a> (video)</p>
+<p><a href="http://blackboard.jhu.edu/">Causal Loop Diagrams</a> (course materials, pdf)</p>
+<p><a href="http://vensim.com/free-download/">Vensim</a> (software)</p>
+<p><a href="https://slideplayer.com/slide/3340958/">The Evolution of Systems Thinking</a> (slides)</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="process.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="probability.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["fundamentals-r-edition.pdf", "fundamentals-r-edition.epub"],
+"toc": {
+"collapse": "chapter"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
